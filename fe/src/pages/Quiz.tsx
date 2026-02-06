@@ -324,7 +324,7 @@ const Quiz: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto px-4 py-6 relative z-10 overflow-y-auto flex-1">
+                <div className="sm:mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:w-[80%] max-w-2xl  px-4 py-6 relative z-10 overflow-y-auto flex-1">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -449,7 +449,7 @@ const Quiz: React.FC = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="max-w-2xl px-4 py-6 relative z-10 overflow-y-auto flex-1"
+                    className="sm:mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:w-[80%] max-w-2xl px-4 py-6 relative z-10 overflow-y-auto flex-1"
                 >
                     {/* Question */}
                     <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-6 mb-6">
