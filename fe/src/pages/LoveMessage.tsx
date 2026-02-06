@@ -35,7 +35,7 @@ const LoveMessage: React.FC = () => {
                 </div>
             </div>
 
-            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10 flex-1 overflow-y-auto">
+            <div className="max-w-2xl mx-auto px-4 py-8 relative [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] z-10 flex-1 overflow-y-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

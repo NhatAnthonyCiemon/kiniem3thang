@@ -85,17 +85,17 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Menu Grid */}
-            <div className="max-w-2xl px-4 py-8 relative z-10 flex-1 overflow-y-auto">
+            <div className="max-w-2xl sm:mx-auto sm:w-[80%] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 py-8 relative z-10 flex-1 overflow-y-auto">
                 {isLoading ? (
                     <div className="space-y-4">
                         {[...Array(3)].map((_, i) => (
                             <div
                                 key={i}
-                                className="bg-slate-800/90 cursor-pointer rounded-2xl p-6 animate-pulse border border-slate-700"
+                                className="bg-slate-800/90  cursor-pointer rounded-2xl p-6 animate-pulse border border-slate-700"
                             >
-                                <div className="h-12 w-12 bg-slate-700 rounded-xl mb-4"></div>
-                                <div className="h-6 bg-slate-700 rounded w-1/2 mb-2"></div>
-                                <div className="h-4 bg-slate-700 rounded w-3/4"></div>
+                                <div className="h-12 sm:w-[80%] bg-slate-700 rounded-xl mb-4"></div>
+                                <div className="h-6 sm:w-[80%] bg-slate-700 rounded w-1/2 mb-2"></div>
+                                <div className="h-4 sm:w-[80%] bg-slate-700 rounded w-3/4"></div>
                             </div>
                         ))}
                     </div>

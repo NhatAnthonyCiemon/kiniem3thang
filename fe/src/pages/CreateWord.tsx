@@ -149,7 +149,7 @@ const CreateWord: React.FC = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="max-w-2xl  px-3 sm:px-4 py-3 sm:py-6 relative z-10 overflow-y-auto flex-1"
+                        className="sm:mx-auto sm:w-[80%] px-3 sm:px-4 py-3 sm:py-6 relative z-10 flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                     >
                         {/* Search Box */}
                         <div className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 px-2.5 py-2.5 sm:p-4 mb-3 sm:mb-6">
@@ -243,7 +243,7 @@ const CreateWord: React.FC = () => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="max-w-2xl px-3 sm:px-4 py-3 sm:py-6 relative z-10 overflow-y-auto flex-1 pb-6"
+                        className="max-w-2xl sm:mx-auto px-3 sm:w-[80%] sm:px-4 py-3 sm:py-6 relative z-10 overflow-y-auto flex-1 pb-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                     >
                         {/* Selected Word */}
                         <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl shadow-sm px-3 py-2.5 sm:p-6 mb-3 sm:mb-6 text-white">

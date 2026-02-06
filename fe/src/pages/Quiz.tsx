@@ -171,7 +171,7 @@ const Quiz: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="max-w-2xl px-3 sm:px-4 py-8 sm:py-12 relative z-10 overflow-y-auto flex-1">
+                <div className="max-w-2xl sm:mx-auto sm:w-[80%] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-3 sm:px-4 py-8 sm:py-12 relative z-10 overflow-y-auto flex-1">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
