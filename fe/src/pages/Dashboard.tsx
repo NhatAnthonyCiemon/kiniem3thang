@@ -85,7 +85,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Menu Grid */}
-            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10 flex-1 overflow-y-auto">
+            <div className="max-w-2xl px-4 py-8 relative z-10 flex-1 overflow-y-auto">
                 {isLoading ? (
                     <div className="space-y-4">
                         {[...Array(3)].map((_, i) => (
