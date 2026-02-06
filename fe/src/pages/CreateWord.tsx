@@ -111,7 +111,7 @@ const CreateWord: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 pb-24 sm:pb-20"
+            className="min-h-screen bg-slate-50 pb-2 sm:pb-2"
             style={{ minHeight: "100dvh" }}
         >
             {/* Header */}
@@ -322,7 +322,6 @@ const CreateWord: React.FC = () => {
                                 disabled={isSaving || !description.trim()}
                                 className="w-full py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors font-medium text-base min-h-[48px] active:scale-95"
                             >
-                                <Check className="w-5 h-5" />
                                 {isSaving ? "Đang lưu..." : "Lưu từ vựng"}
                             </button>
                         </div>
