@@ -17,15 +17,20 @@ const wordService = {
     },
     getWords: async (userId, page, limit) => {
         const offset = (page - 1) * limit;
-        const words = await prisma.words.findMany({
-            where: { user_id: userId },
-            skip: offset,
-            take: limit,
-            orderBy: {
-                id: "desc",
-            },
-        });
-        return words;
+        const [words, total] = await Promise.all([
+            prisma.words.findMany({
+                where: { user_id: userId },
+                skip: offset,
+                take: limit,
+                orderBy: {
+                    id: "desc",
+                },
+            }),
+            prisma.words.count({
+                where: { user_id: userId },
+            }),
+        ]);
+        return { words, total };
     },
     searchWords: async (userId, keyword) => {
         const words = await prisma.words.findMany({

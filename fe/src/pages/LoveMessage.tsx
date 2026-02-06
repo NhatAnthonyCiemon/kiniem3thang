@@ -7,8 +7,8 @@ const LoveMessage: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 relative"
-            style={{ minHeight: "100dvh" }}
+            className="h-screen bg-slate-50 flex flex-col overflow-hidden"
+            style={{ height: "100vh" }}
         >
             {/* Background Image */}
             <div className="fixed inset-0 z-0">
@@ -21,7 +21,7 @@ const LoveMessage: React.FC = () => {
             </div>
 
             {/* Header */}
-            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20 flex-shrink-0">
                 <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
                     <button
                         onClick={() => navigate("/dashboard")}
@@ -35,7 +35,7 @@ const LoveMessage: React.FC = () => {
                 </div>
             </div>
 
-            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10">
+            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10 flex-1 overflow-y-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

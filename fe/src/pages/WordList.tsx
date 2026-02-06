@@ -5,6 +5,8 @@ import {
     Plus,
     ChevronLeft,
     ChevronRight,
+    ChevronsLeft,
+    ChevronsRight,
     Volume2,
     Sparkles,
     Save,
@@ -226,10 +228,16 @@ const WordList: React.FC = () => {
                             </div>
                         ))}
                     </div>
-                ) : displayWords && displayWords.length > 0 ? (
+                ) : displayWords &&
+                  (searchKeyword.trim()
+                      ? displayWords.length > 0
+                      : displayWords.words?.length > 0) ? (
                     <>
                         <div className="space-y-3 mb-6">
-                            {displayWords.map((word: any, index: number) => {
+                            {(searchKeyword.trim()
+                                ? displayWords
+                                : displayWords.words
+                            ).map((word: any, index: number) => {
                                 const displayNumber = searchKeyword.trim()
                                     ? index + 1
                                     : (page - 1) * limit + index + 1;
@@ -246,27 +254,64 @@ const WordList: React.FC = () => {
                         </div>
 
                         {/* Pagination - only show when not searching */}
-                        {!searchKeyword.trim() && (
-                            <div className="flex items-center justify-center gap-4">
-                                <button
-                                    onClick={() =>
-                                        setPage((p) => Math.max(1, p - 1))
-                                    }
-                                    disabled={page === 1}
-                                    className="p-2 bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                >
-                                    <ChevronLeft className="w-5 h-5 text-slate-200" />
-                                </button>
-                                <span className="text-sm text-white font-medium">
-                                    Trang {page}
-                                </span>
-                                <button
-                                    onClick={() => setPage((p) => p + 1)}
-                                    disabled={!words || words.length < limit}
-                                    className="p-2 bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                >
-                                    <ChevronRight className="w-5 h-5 text-slate-200" />
-                                </button>
+                        {!searchKeyword.trim() && words && (
+                            <div className="flex flex-col items-center gap-3">
+                                <div className="flex items-center gap-1.5 sm:gap-2">
+                                    {/* First page */}
+                                    <button
+                                        onClick={() => setPage(1)}
+                                        disabled={page === 1}
+                                        className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        title="Trang đầu"
+                                    >
+                                        <ChevronsLeft className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
+                                    </button>
+
+                                    {/* Previous page */}
+                                    <button
+                                        onClick={() =>
+                                            setPage((p) => Math.max(1, p - 1))
+                                        }
+                                        disabled={page === 1}
+                                        className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        title="Trang trước"
+                                    >
+                                        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
+                                    </button>
+
+                                    {/* Page info */}
+                                    <div className="px-3 sm:px-4 h-9 sm:h-10 flex items-center bg-slate-800/90 border border-slate-700 rounded-lg">
+                                        <span className="text-xs sm:text-sm text-white font-medium whitespace-nowrap">
+                                            Trang {words.curPage} /{" "}
+                                            {words.totalPage}
+                                        </span>
+                                    </div>
+
+                                    {/* Next page */}
+                                    <button
+                                        onClick={() => setPage((p) => p + 1)}
+                                        disabled={page >= words.totalPage}
+                                        className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        title="Trang sau"
+                                    >
+                                        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
+                                    </button>
+
+                                    {/* Last page */}
+                                    <button
+                                        onClick={() => setPage(words.totalPage)}
+                                        disabled={page >= words.totalPage}
+                                        className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                        title="Trang cuối"
+                                    >
+                                        <ChevronsRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
+                                    </button>
+                                </div>
+
+                                {/* Total count */}
+                                <p className="text-xs sm:text-sm text-slate-300">
+                                    Tổng cộng: {words.total} từ vựng
+                                </p>
                             </div>
                         )}
 

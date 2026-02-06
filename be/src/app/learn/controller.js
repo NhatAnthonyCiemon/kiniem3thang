@@ -58,16 +58,22 @@ const learnController = {
         try {
             const userId = req.user.id;
             const { page = 1, limit = 10 } = req.query;
-            const words = await User.getWords(
+            const currentPage = parseInt(page);
+            const pageLimit = parseInt(limit);
+            const { words, total } = await User.getWords(
                 userId,
-                parseInt(page),
-                parseInt(limit),
+                currentPage,
+                pageLimit,
             );
-            return res
-                .status(200)
-                .json(
-                    createResponse(200, "Words retrieved successfully", words),
-                );
+            const totalPages = Math.ceil(total / pageLimit);
+            return res.status(200).json(
+                createResponse(200, "Words retrieved successfully", {
+                    words,
+                    curPage: currentPage,
+                    totalPage: totalPages,
+                    total,
+                }),
+            );
         } catch (error) {
             return res
                 .status(500)
@@ -78,13 +84,13 @@ const learnController = {
         try {
             const userId = req.user.id;
             const { keyword } = req.query;
-            
+
             if (!keyword) {
                 return res
                     .status(400)
                     .json(createErrorResponse(400, "Keyword is required"));
             }
-            
+
             const words = await User.searchWords(userId, keyword);
             return res
                 .status(200)
@@ -225,7 +231,7 @@ const learnController = {
         try {
             const userId = req.user.id;
             const { startId, endId } = req.query;
-            
+
             if (!startId || !endId || isNaN(startId) || isNaN(endId)) {
                 return res
                     .status(400)
@@ -236,10 +242,10 @@ const learnController = {
                         ),
                     );
             }
-            
+
             const start = parseInt(startId);
             const end = parseInt(endId);
-            
+
             if (start > end) {
                 return res
                     .status(400)
@@ -250,7 +256,7 @@ const learnController = {
                         ),
                     );
             }
-            
+
             const quizData = await User.getQuizWithCountWord(
                 userId,
                 start,
@@ -275,7 +281,7 @@ const learnController = {
         try {
             const userId = req.user.id;
             const { order } = req.params;
-            
+
             if (!order || isNaN(order) || order <= 0) {
                 return res
                     .status(400)
@@ -286,24 +292,23 @@ const learnController = {
                         ),
                     );
             }
-            
+
             const word = await User.getWordByOrder(userId, parseInt(order));
-            
+
             if (!word) {
                 return res
                     .status(404)
-                    .json(createErrorResponse(404, "Word not found at this order"));
+                    .json(
+                        createErrorResponse(
+                            404,
+                            "Word not found at this order",
+                        ),
+                    );
             }
-            
+
             return res
                 .status(200)
-                .json(
-                    createResponse(
-                        200,
-                        "Word retrieved successfully",
-                        word,
-                    ),
-                );
+                .json(createResponse(200, "Word retrieved successfully", word));
         } catch (error) {
             return res
                 .status(500)
