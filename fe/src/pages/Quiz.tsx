@@ -307,14 +307,14 @@ const Quiz: React.FC = () => {
                 }}
             >
                 {/* Background Image */}
-                <div className="fixed inset-0 z-0">
+                {/* <div className="fixed inset-0 z-0">
                     <img
                         src="/bg.jpg"
                         alt="Background"
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
-                </div>
+                </div> */}
                 <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
                     <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
                         <button
