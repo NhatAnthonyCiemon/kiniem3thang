@@ -291,7 +291,20 @@ const Quiz: React.FC = () => {
         return (
             <div
                 className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
-                style={{ height: "100vh" }}
+                style={{
+                    height: "100vh",
+                    backgroundImage: `
+                    linear-gradient(
+                        rgba(15, 23, 42, 0.55),
+                        rgba(15, 23, 42, 0.55)
+                    ),
+                    url('/bg.jpg')
+                    `,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundAttachment: "scroll" /* QUAN TRỌNG */,
+                }}
             >
                 {/* Background Image */}
                 <div className="fixed inset-0 z-0">
@@ -406,7 +419,20 @@ const Quiz: React.FC = () => {
     return (
         <div
             className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
-            style={{ height: "100vh" }}
+            style={{
+                height: "100vh",
+                backgroundImage: `
+                    linear-gradient(
+                        rgba(15, 23, 42, 0.55),
+                        rgba(15, 23, 42, 0.55)
+                    ),
+                    url('/bg.jpg')
+                    `,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundAttachment: "scroll" /* QUAN TRỌNG */,
+            }}
         >
             {/* Background Image */}
             <div className="fixed inset-0 z-0">
