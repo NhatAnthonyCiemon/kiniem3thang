@@ -143,40 +143,52 @@ const Quiz: React.FC = () => {
 
     if (!started) {
         return (
-            <div className="min-h-screen bg-slate-50">
+            <div
+                className="min-h-screen bg-slate-50 relative"
+                style={{ minHeight: "100dvh" }}
+            >
+                {/* Background Image */}
+                <div className="fixed inset-0 z-0">
+                    <img
+                        src="/bg.jpg"
+                        alt="Background"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+                </div>
                 {/* Header */}
-                <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+                <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
                     <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
                         <button
                             onClick={() => navigate("/dashboard")}
-                            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                            className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
                         >
-                            <ArrowLeft className="w-5 h-5 text-slate-600" />
+                            <ArrowLeft className="w-5 h-5 text-slate-200" />
                         </button>
-                        <h1 className="text-lg font-semibold text-slate-800">
+                        <h1 className="text-lg font-semibold text-white">
                             Luyện tập Quiz
                         </h1>
                     </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto px-4 py-12">
+                <div className="max-w-2xl mx-auto px-4 py-12 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center"
+                        className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-8 text-center"
                     >
-                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Trophy className="w-8 h-8 text-blue-600" />
+                        <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <Trophy className="w-8 h-8 text-blue-400" />
                         </div>
-                        <h2 className="text-2xl font-bold text-slate-800 mb-4">
+                        <h2 className="text-2xl font-bold text-white mb-4">
                             Bắt đầu Quiz
                         </h2>
-                        <p className="text-slate-600 mb-6">
+                        <p className="text-slate-200 mb-6">
                             Nhập vị trí bắt đầu và kết thúc
                         </p>
                         <div className="space-y-4 mb-6">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-200 mb-2">
                                     Vị trí bắt đầu
                                 </label>
                                 <input
@@ -194,7 +206,7 @@ const Quiz: React.FC = () => {
                                     }}
                                     placeholder="VD: 1"
                                     min="1"
-                                    className="w-full max-w-xs mx-auto px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 text-center text-base"
+                                    className="w-full max-w-xs mx-auto px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 text-center text-base"
                                 />
                                 {isLoadingStart && (
                                     <p className="text-sm text-blue-600 mt-2">
@@ -209,7 +221,7 @@ const Quiz: React.FC = () => {
                                 )}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-2">
+                                <label className="block text-sm font-medium text-slate-200 mb-2">
                                     Vị trí kết thúc
                                 </label>
                                 <input
@@ -227,7 +239,7 @@ const Quiz: React.FC = () => {
                                     }}
                                     placeholder="VD: 10"
                                     min="1"
-                                    className="w-full max-w-xs mx-auto px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 text-center text-base"
+                                    className="w-full max-w-xs mx-auto px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 text-center text-base"
                                 />
                                 {isLoadingEnd && (
                                     <p className="text-sm text-blue-600 mt-2">
@@ -264,8 +276,20 @@ const Quiz: React.FC = () => {
         const percentage = Math.round((correctCount / questions.length) * 100);
 
         return (
-            <div className="min-h-screen bg-slate-50">
-                <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+            <div
+                className="min-h-screen bg-slate-50 relative"
+                style={{ minHeight: "100dvh" }}
+            >
+                {/* Background Image */}
+                <div className="fixed inset-0 z-0">
+                    <img
+                        src="/bg.jpg"
+                        alt="Background"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+                </div>
+                <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
                     <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
                         <button
                             onClick={() => {
@@ -277,17 +301,17 @@ const Quiz: React.FC = () => {
                                 setStartId(null);
                                 setEndId(null);
                             }}
-                            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                            className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
                         >
-                            <ArrowLeft className="w-5 h-5 text-slate-600" />
+                            <ArrowLeft className="w-5 h-5 text-slate-200" />
                         </button>
-                        <h1 className="text-lg font-semibold text-slate-800">
+                        <h1 className="text-lg font-semibold text-white">
                             Kết quả
                         </h1>
                     </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto px-4 py-6">
+                <div className="max-w-2xl mx-auto px-4 py-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -305,10 +329,10 @@ const Quiz: React.FC = () => {
                         {questions.map((question, index) => (
                             <div
                                 key={index}
-                                className={`bg-white rounded-xl border-2 p-4 ${
+                                className={`bg-slate-800/90 rounded-xl border-2 p-4 ${
                                     isCorrect(question)
-                                        ? "border-green-300"
-                                        : "border-red-300"
+                                        ? "border-green-500"
+                                        : "border-red-500"
                                 }`}
                             >
                                 <div className="flex items-start gap-3">
@@ -322,19 +346,19 @@ const Quiz: React.FC = () => {
                                         {index + 1}
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-slate-800 font-medium mb-2">
+                                        <p className="text-white font-medium mb-2">
                                             {question.word}
                                         </p>
-                                        <p className="text-sm text-slate-600">
+                                        <p className="text-sm text-slate-200">
                                             Đáp án đúng:{" "}
-                                            <span className="font-semibold text-green-600">
+                                            <span className="font-semibold text-green-400">
                                                 {question.correctAnswer}
                                             </span>
                                         </p>
                                         {!isCorrect(question) && (
-                                            <p className="text-sm text-slate-600 mt-1">
+                                            <p className="text-sm text-slate-200 mt-1">
                                                 Bạn chọn:{" "}
-                                                <span className="font-semibold text-red-600">
+                                                <span className="font-semibold text-red-400">
                                                     {question.userAnswer}
                                                 </span>
                                             </p>
@@ -367,25 +391,37 @@ const Quiz: React.FC = () => {
     const currentQuestion = questions[currentIndex];
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div
+            className="min-h-screen bg-slate-50 relative"
+            style={{ minHeight: "100dvh" }}
+        >
+            {/* Background Image */}
+            <div className="fixed inset-0 z-0">
+                <img
+                    src="/bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+            </div>
             {/* Header */}
-            <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
                 <div className="max-w-2xl mx-auto px-4 py-4">
                     <div className="flex items-center justify-between mb-2">
                         <button
                             onClick={() => navigate("/dashboard")}
-                            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                            className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
                         >
-                            <ArrowLeft className="w-5 h-5 text-slate-600" />
+                            <ArrowLeft className="w-5 h-5 text-slate-200" />
                         </button>
-                        <h1 className="text-lg font-semibold text-slate-800">
+                        <h1 className="text-lg font-semibold text-white">
                             Câu {currentIndex + 1}/{questions.length}
                         </h1>
                         <div className="w-9"></div> {/* Spacer for alignment */}
                     </div>
-                    <div className="w-full bg-slate-200 rounded-full h-2">
+                    <div className="w-full bg-slate-700 rounded-full h-2">
                         <div
-                            className="bg-blue-600 h-2 rounded-full transition-all"
+                            className="bg-blue-500 h-2 rounded-full transition-all"
                             style={{
                                 width: `${((currentIndex + 1) / questions.length) * 100}%`,
                             }}
@@ -400,11 +436,11 @@ const Quiz: React.FC = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="max-w-2xl mx-auto px-4 py-6"
+                    className="max-w-2xl mx-auto px-4 py-6 relative z-10"
                 >
                     {/* Question */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
-                        <h2 className="text-xl font-semibold text-slate-800 mb-4">
+                    <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-6 mb-6">
+                        <h2 className="text-xl font-semibold text-white mb-4">
                             {currentQuestion.word}
                         </h2>
                     </div>
@@ -426,17 +462,17 @@ const Quiz: React.FC = () => {
                                     disabled={showFeedback}
                                     className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
                                         showFeedback && isCorrectOption
-                                            ? "border-green-500 bg-green-50"
+                                            ? "border-green-500 bg-green-500/20"
                                             : showFeedback &&
                                                 isSelected &&
                                                 !isCorrectOption
-                                              ? "border-red-500 bg-red-50"
+                                              ? "border-red-500 bg-red-500/20"
                                               : isSelected
-                                                ? "border-blue-500 bg-blue-50"
-                                                : "border-slate-200 bg-white hover:border-blue-300"
+                                                ? "border-blue-500 bg-blue-500/20"
+                                                : "border-slate-700 bg-slate-800/90 hover:border-blue-500"
                                     } ${showFeedback ? "cursor-not-allowed" : ""}`}
                                 >
-                                    <span className="text-slate-800 font-medium">
+                                    <span className="text-white font-medium">
                                         {option}
                                     </span>
                                 </button>
@@ -449,7 +485,7 @@ const Quiz: React.FC = () => {
                         <button
                             onClick={handlePrev}
                             disabled={currentIndex === 0}
-                            className="px-6 py-3 bg-white border border-slate-200 text-slate-700 rounded-xl hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                            className="px-6 py-3 bg-slate-800/90 border border-slate-700 text-white rounded-xl hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                         >
                             <ChevronLeft className="w-5 h-5" />
                             Quay lại

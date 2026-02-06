@@ -157,21 +157,29 @@ const WordList: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 pb-24 sm:pb-20"
+            className="min-h-screen bg-slate-50 pb-2 sm:pb-2"
             style={{ minHeight: "100dvh" }}
         >
+            <div className="fixed inset-0 z-0">
+                <img
+                    src="/bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
+            </div>
             {/* Header */}
-            <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
                 <div className="max-w-2xl mx-auto px-4 py-4">
                     <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => navigate("/dashboard")}
-                                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                                className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
                             >
-                                <ArrowLeft className="w-5 h-5 text-slate-600" />
+                                <ArrowLeft className="w-5 h-5 text-slate-200" />
                             </button>
-                            <h1 className="text-lg font-semibold text-slate-800">
+                            <h1 className="text-lg font-semibold text-white">
                                 Từ vựng của tôi
                             </h1>
                         </div>
@@ -191,7 +199,7 @@ const WordList: React.FC = () => {
                             value={searchKeyword}
                             onChange={(e) => setSearchKeyword(e.target.value)}
                             placeholder="Tìm kiếm từ vựng..."
-                            className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 text-base"
+                            className="w-full pl-10 pr-10 py-2.5 bg-slate-900 border-2 border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 text-base"
                         />
                         {searchKeyword && (
                             <button
@@ -205,16 +213,16 @@ const WordList: React.FC = () => {
                 </div>
             </div>
 
-            <div className="max-w-2xl mx-auto px-4 py-6">
+            <div className="max-w-2xl mx-auto px-4 py-6 relative z-10">
                 {displayLoading ? (
                     <div className="space-y-3">
                         {[...Array(5)].map((_, i) => (
                             <div
                                 key={i}
-                                className="bg-white rounded-xl p-4 animate-pulse"
+                                className="bg-slate-800/90 rounded-xl p-4 animate-pulse"
                             >
-                                <div className="h-6 bg-slate-200 rounded w-1/3 mb-2"></div>
-                                <div className="h-4 bg-slate-200 rounded w-2/3"></div>
+                                <div className="h-6 bg-slate-700 rounded w-1/3 mb-2"></div>
+                                <div className="h-4 bg-slate-700 rounded w-2/3"></div>
                             </div>
                         ))}
                     </div>
@@ -245,33 +253,33 @@ const WordList: React.FC = () => {
                                         setPage((p) => Math.max(1, p - 1))
                                     }
                                     disabled={page === 1}
-                                    className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    className="p-2 bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                 >
-                                    <ChevronLeft className="w-5 h-5 text-slate-600" />
+                                    <ChevronLeft className="w-5 h-5 text-slate-200" />
                                 </button>
-                                <span className="text-sm text-slate-600 font-medium">
+                                <span className="text-sm text-white font-medium">
                                     Trang {page}
                                 </span>
                                 <button
                                     onClick={() => setPage((p) => p + 1)}
                                     disabled={!words || words.length < limit}
-                                    className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    className="p-2 bg-slate-800/90 border border-slate-700 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                 >
-                                    <ChevronRight className="w-5 h-5 text-slate-600" />
+                                    <ChevronRight className="w-5 h-5 text-slate-200" />
                                 </button>
                             </div>
                         )}
 
                         {/* Search results count */}
                         {searchKeyword.trim() && (
-                            <p className="text-center text-sm text-slate-600">
+                            <p className="text-center text-sm text-white">
                                 Tìm thấy {displayWords.length} kết quả
                             </p>
                         )}
                     </>
                 ) : (
                     <div className="text-center py-12">
-                        <p className="text-slate-600 mb-4">
+                        <p className="text-white mb-4">
                             {searchKeyword.trim()
                                 ? "Không tìm thấy từ vựng nào"
                                 : "Chưa có từ vựng nào"}
@@ -279,7 +287,7 @@ const WordList: React.FC = () => {
                         {searchKeyword.trim() ? (
                             <button
                                 onClick={handleClearSearch}
-                                className="px-6 py-3 bg-slate-600 text-white rounded-xl hover:bg-slate-700 transition-colors inline-flex items-center gap-2"
+                                className="px-6 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors inline-flex items-center gap-2"
                             >
                                 <X className="w-5 h-5" />
                                 Xóa tìm kiếm
@@ -312,16 +320,16 @@ const WordList: React.FC = () => {
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 50 }}
-                            className="fixed inset-x-4 bottom-4 max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl z-50 max-h-[80vh] overflow-y-auto"
+                            className="fixed inset-x-4 bottom-4 max-w-2xl mx-auto bg-slate-800 rounded-2xl shadow-2xl z-50 max-h-[80vh] overflow-y-auto border border-slate-700"
                         >
                             <div className="p-6">
                                 <div className="flex items-center justify-between gap-4 mb-4">
                                     <div className="flex-1">
-                                        <h2 className="text-2xl font-bold text-slate-800 mb-1">
+                                        <h2 className="text-2xl font-bold text-white mb-1">
                                             {selectedWord.word}
                                         </h2>
                                         {phonetic && (
-                                            <p className="text-sm text-slate-600 font-mono">
+                                            <p className="text-sm text-slate-300 font-mono">
                                                 {phonetic}
                                             </p>
                                         )}
@@ -360,7 +368,7 @@ const WordList: React.FC = () => {
 
                                 <div className="space-y-4">
                                     <div>
-                                        <h3 className="text-sm font-medium text-slate-600 mb-2">
+                                        <h3 className="text-sm font-medium text-slate-300 mb-2">
                                             Nghĩa
                                         </h3>
                                         {isEditing ? (
@@ -373,10 +381,10 @@ const WordList: React.FC = () => {
                                                 }
                                                 placeholder="Nhập nghĩa tiếng Việt hoặc mô tả..."
                                                 rows={3}
-                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 resize-none"
+                                                className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 resize-none"
                                             />
                                         ) : (
-                                            <p className="text-slate-800">
+                                            <p className="text-white">
                                                 {selectedWord.description ||
                                                     "Không có"}
                                             </p>
@@ -384,7 +392,7 @@ const WordList: React.FC = () => {
                                     </div>
 
                                     <div>
-                                        <h3 className="text-sm font-medium text-slate-600 mb-2">
+                                        <h3 className="text-sm font-medium text-slate-300 mb-2">
                                             Ghi chú
                                         </h3>
                                         {isEditing ? (
@@ -395,10 +403,10 @@ const WordList: React.FC = () => {
                                                 }
                                                 placeholder="Ghi chú cá nhân (không bắt buộc)..."
                                                 rows={2}
-                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 resize-none"
+                                                className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 resize-none"
                                             />
                                         ) : (
-                                            <p className="text-slate-800">
+                                            <p className="text-white">
                                                 {selectedWord.note ||
                                                     "Không có ghi chú"}
                                             </p>
@@ -407,7 +415,7 @@ const WordList: React.FC = () => {
 
                                     <div>
                                         <div className="flex items-center justify-between mb-2">
-                                            <h3 className="text-sm font-medium text-slate-600">
+                                            <h3 className="text-sm font-medium text-slate-300">
                                                 Nội dung AI
                                             </h3>
                                             {isEditing && (
@@ -426,11 +434,11 @@ const WordList: React.FC = () => {
                                             )}
                                         </div>
                                         {editAiContent ? (
-                                            <div className="p-4 bg-purple-50 border border-purple-200 rounded-xl text-slate-700 text-sm">
+                                            <div className="p-4 bg-slate-900 border border-slate-600 rounded-xl text-slate-200 text-sm">
                                                 {formatAIContent(editAiContent)}
                                             </div>
                                         ) : (
-                                            <p className="text-slate-500 text-sm italic">
+                                            <p className="text-slate-400 text-sm italic">
                                                 Chưa có nội dung AI
                                             </p>
                                         )}
@@ -441,7 +449,7 @@ const WordList: React.FC = () => {
                                     <div className="flex gap-3 mt-6">
                                         <button
                                             onClick={() => setIsEditing(false)}
-                                            className="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl hover:bg-slate-300 transition-colors font-medium"
+                                            className="flex-1 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors font-medium"
                                         >
                                             Hủy
                                         </button>
@@ -457,7 +465,7 @@ const WordList: React.FC = () => {
                                 ) : (
                                     <button
                                         onClick={() => setSelectedWord(null)}
-                                        className="mt-6 w-full py-3 bg-slate-800 text-white rounded-xl hover:bg-slate-900 transition-colors font-medium"
+                                        className="mt-6 w-full py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium"
                                     >
                                         Đóng
                                     </button>
@@ -486,24 +494,24 @@ const WordList: React.FC = () => {
                                             exit={{ opacity: 0, scale: 0.95 }}
                                             className="fixed inset-0 z-50 flex items-center justify-center p-4"
                                         >
-                                            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+                                            <div className="bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl max-w-md w-full p-6">
                                                 <div className="flex items-center gap-3 mb-4">
-                                                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                                        <Trash2 className="w-6 h-6 text-red-600" />
+                                                    <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                        <Trash2 className="w-6 h-6 text-red-400" />
                                                     </div>
                                                     <div className="flex-1">
-                                                        <h3 className="text-lg font-semibold text-slate-800">
+                                                        <h3 className="text-lg font-semibold text-white">
                                                             Xác nhận xóa
                                                         </h3>
-                                                        <p className="text-sm text-slate-600">
+                                                        <p className="text-sm text-slate-300">
                                                             Hành động này không
                                                             thể hoàn tác
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <p className="text-slate-700 mb-6">
+                                                <p className="text-slate-200 mb-6">
                                                     Bạn có chắc muốn xóa từ{" "}
-                                                    <span className="font-semibold text-slate-900">
+                                                    <span className="font-semibold text-white">
                                                         "{selectedWord.word}"
                                                     </span>{" "}
                                                     khỏi danh sách từ vựng của
@@ -516,7 +524,7 @@ const WordList: React.FC = () => {
                                                                 false,
                                                             )
                                                         }
-                                                        className="flex-1 py-3 bg-slate-200 text-slate-700 rounded-xl hover:bg-slate-300 transition-colors font-medium"
+                                                        className="flex-1 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors font-medium"
                                                     >
                                                         Hủy
                                                     </button>

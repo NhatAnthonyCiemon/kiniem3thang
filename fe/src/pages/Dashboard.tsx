@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LogOut, BookOpen, List, Brain } from "lucide-react";
+import { LogOut, BookOpen, List, Brain, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/useAuthContext";
 import { useUser } from "../hooks/useUser";
@@ -38,45 +38,64 @@ const Dashboard: React.FC = () => {
             color: "from-orange-500 to-red-500",
             path: "/quiz",
         },
+        {
+            icon: Heart,
+            title: "Lời gửi của anh",
+            description: "Những lời yêu thương dành cho bé",
+            color: "from-pink-500 to-rose-500",
+            path: "/love-message",
+        },
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div
+            className="min-h-screen bg-slate-50 relative"
+            style={{ minHeight: "100dvh" }}
+        >
+            {/* Background Image */}
+            <div className="fixed inset-0 z-0">
+                <img
+                    src="/bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
+            </div>
             {/* Header */}
-            <div className="bg-white border-b border-slate-200">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 relative z-10">
                 <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
                     <div>
-                        <h1 className="text-xl font-bold text-slate-800">
-                            Học từ vựng
+                        <h1 className="text-xl font-bold text-white">
+                            Học từ vựng của Thanh Chiều
                         </h1>
                         {user && (
-                            <p className="text-sm text-slate-600 mt-1">
+                            <p className="text-sm text-slate-200 mt-1">
                                 Xin chào, {user.username || user.email}
                             </p>
                         )}
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="cursor-pointer p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                        className="cursor-pointer p-2 hover:bg-slate-800 rounded-lg transition-colors"
                         title="Đăng xuất"
                     >
-                        <LogOut className="w-5 h-5 text-slate-600" />
+                        <LogOut className="w-5 h-5 text-slate-200" />
                     </button>
                 </div>
             </div>
 
             {/* Menu Grid */}
-            <div className="max-w-2xl mx-auto px-4 py-8">
+            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10">
                 {isLoading ? (
                     <div className="space-y-4">
                         {[...Array(3)].map((_, i) => (
                             <div
                                 key={i}
-                                className="bg-white cursor-pointer rounded-2xl p-6 animate-pulse"
+                                className="bg-slate-800/90 cursor-pointer rounded-2xl p-6 animate-pulse border border-slate-700"
                             >
-                                <div className="h-12 w-12 bg-slate-200 rounded-xl mb-4"></div>
-                                <div className="h-6 bg-slate-200 rounded w-1/2 mb-2"></div>
-                                <div className="h-4 bg-slate-200 rounded w-3/4"></div>
+                                <div className="h-12 w-12 bg-slate-700 rounded-xl mb-4"></div>
+                                <div className="h-6 bg-slate-700 rounded w-1/2 mb-2"></div>
+                                <div className="h-4 bg-slate-700 rounded w-3/4"></div>
                             </div>
                         ))}
                     </div>
@@ -89,7 +108,7 @@ const Dashboard: React.FC = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
                                 onClick={() => navigate(item.path)}
-                                className="w-full bg-white hover:shadow-lg transition-all rounded-2xl p-6 text-left border border-slate-200 group cursor-pointer"
+                                className="w-full bg-slate-800/90 hover:shadow-lg hover:bg-slate-700 transition-all rounded-2xl p-6 text-left border border-slate-700 hover:border-blue-500 group cursor-pointer"
                             >
                                 <div className="flex items-start gap-4">
                                     <div
@@ -98,10 +117,10 @@ const Dashboard: React.FC = () => {
                                         <item.icon className="w-7 h-7 text-white" />
                                     </div>
                                     <div className="flex-1">
-                                        <h3 className="text-lg font-semibold text-slate-800 mb-1">
+                                        <h3 className="text-lg font-semibold text-white mb-1">
                                             {item.title}
                                         </h3>
-                                        <p className="text-sm text-slate-600">
+                                        <p className="text-sm text-slate-200">
                                             {item.description}
                                         </p>
                                     </div>

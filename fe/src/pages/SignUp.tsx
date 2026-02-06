@@ -50,12 +50,24 @@ const SignUp: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8">
+        <div
+            className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8 relative"
+            style={{ minHeight: "100dvh" }}
+        >
+            {/* Background Image */}
+            <div className="fixed inset-0 z-0">
+                <img
+                    src="/bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+            </div>
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="relative bg-white border border-slate-200 shadow-lg rounded-2xl p-8 w-full max-w-md"
+                className="relative bg-white/95 backdrop-blur-sm border border-slate-200 shadow-lg rounded-2xl p-8 w-full max-w-md z-10"
             >
                 <Link
                     to="/"
