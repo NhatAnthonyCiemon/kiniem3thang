@@ -14,11 +14,9 @@ import { AuthProvider } from "./contexts/useAuthContext";
 
 function AppLayout() {
     return (
-        <div className="bg-black">
-            <AuthProvider>
-                <Outlet />
-            </AuthProvider>
-        </div>
+        <AuthProvider>
+            <Outlet />
+        </AuthProvider>
     );
 }
 

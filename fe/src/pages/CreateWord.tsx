@@ -112,19 +112,31 @@ const CreateWord: React.FC = () => {
     return (
         <div
             className="h-screen bg-slate-50 flex flex-col overflow-hidden"
-            style={{ height: "100vh" }}
+            style={{
+                height: "100vh",
+                backgroundImage: `
+                    linear-gradient(
+                        rgba(15, 23, 42, 0.55),
+                        rgba(15, 23, 42, 0.55)
+                    ),
+                    url('/bg.jpg')
+                    `,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundAttachment: "scroll" /* QUAN TRỌNG */,
+            }}
         >
             {/* Header */}
-            <div className="fixed inset-0 z-0">
+            {/* <div className="fixed inset-0 z-0">
                 <img
                     src="/bg.jpg"
                     alt="Background"
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
-            </div>
+            </div> */}
 
-            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20 flex-shrink-0">
+            <div className=" border-b border-slate-700 sticky top-0 z-20 flex-shrink-0">
                 <div className="max-w-2xl  px-3 sm:px-4 py-2.5 sm:py-4 flex items-center gap-2 sm:gap-3">
                     <button
                         onClick={() =>
@@ -164,7 +176,7 @@ const CreateWord: React.FC = () => {
                                         handleSelectWord(keyword)
                                     }
                                     placeholder="Nhập từ tiếng Anh..."
-                                    className="w-full px-2 sm:px-4 py-2 sm:py-3 bg-slate-900 border border-slate-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 pr-16 sm:pr-24 text-sm sm:text-base"
+                                    className="w-full px-2 sm:px-4 py-2 sm:py-3 border border-slate-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 pr-16 sm:pr-24 text-sm sm:text-base"
                                 />
                                 <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                                     {isSearching && (

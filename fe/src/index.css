@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+body {
+    background-image: url("./bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* QUAN TRỌNG */
+}
 :root {
     font-family:
         system-ui,

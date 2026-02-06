@@ -50,17 +50,30 @@ const Dashboard: React.FC = () => {
     return (
         <div
             className="h-screen bg-slate-50 flex flex-col overflow-hidden"
-            style={{ height: "100vh" }}
+            style={{
+                height: "100vh",
+                backgroundImage: `
+                    linear-gradient(
+                        rgba(15, 23, 42, 0.55),
+                        rgba(15, 23, 42, 0.55)
+                    ),
+                    url('/bg.jpg')
+                    `,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundAttachment: "scroll" /* QUAN TRỌNG */,
+            }}
         >
             {/* Background Image */}
-            <div className="fixed inset-0 z-0">
+            {/* <div className="fixed inset-0 z-0">
                 <img
                     src="/bg.jpg"
                     alt="Background"
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
-            </div>
+            </div> */}
             {/* Header */}
             <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 relative z-10 flex-shrink-0">
                 <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
