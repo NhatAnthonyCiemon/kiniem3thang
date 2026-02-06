@@ -53,11 +53,11 @@ const LoveMessage: React.FC = () => {
                     {/* Message content */}
                     <div className="space-y-4 text-slate-200 leading-relaxed">
                         <p className="text-base">
-                            Vậy là mình đã bước sang tháng 3 rồi nè. Nhìn lại
-                            thời gian qua, có lúc zui, có lúc buồn, nhưng với
-                            anh, từng khoảnh khắc đều rất đáng trân trọng vì lúc
-                            nào cũng có bé ở bên. Anh thấy mình thật may mắn và
-                            hạnh phúc khi được đồng hành cùng bé.
+                            Vậy là mình đã bước sang tháng thứ 3 rồi nè. Nhìn
+                            lại thời gian qua, có lúc zui, có lúc buồn, nhưng
+                            với anh, từng khoảnh khắc đều rất đáng trân trọng vì
+                            lúc nào cũng có bé ở bên. Anh thấy mình thật may mắn
+                            và hạnh phúc khi được đồng hành cùng bé.
                         </p>
                         <p className="text-base">
                             Anh hi vọng tụi mình sẽ còn đi cùng nhau thật lâu
@@ -88,7 +88,7 @@ const LoveMessage: React.FC = () => {
 
                     {/* Date */}
                     <p className="text-center text-sm text-slate-400 mt-6 italic">
-                        Tháng 3, 2025
+                        Ngày 6, Tháng 2, 2025
                     </p>
                 </motion.div>
             </div>
