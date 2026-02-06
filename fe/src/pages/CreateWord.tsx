@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowLeft, ArrowRight, Check, Volume2 } from "lucide-react";
+import { Sparkles, ArrowLeft, ArrowRight, Volume2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCreateWord } from "../hooks/useCreateWord";
 import { useWordSuggestions } from "../hooks/useWordSuggestions";
