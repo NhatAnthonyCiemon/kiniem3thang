@@ -49,8 +49,8 @@ const Dashboard: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 relative"
-            style={{ minHeight: "100dvh" }}
+            className="h-screen bg-slate-50 flex flex-col overflow-hidden"
+            style={{ height: "100vh" }}
         >
             {/* Background Image */}
             <div className="fixed inset-0 z-0">
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
                 <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
             </div>
             {/* Header */}
-            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 relative z-10">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 relative z-10 flex-shrink-0">
                 <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
                     <div>
                         <h1 className="text-xl font-bold text-white">
@@ -85,7 +85,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Menu Grid */}
-            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10">
+            <div className="max-w-2xl mx-auto px-4 py-8 relative z-10 flex-1 overflow-y-auto">
                 {isLoading ? (
                     <div className="space-y-4">
                         {[...Array(3)].map((_, i) => (

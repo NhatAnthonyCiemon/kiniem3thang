@@ -144,8 +144,8 @@ const Quiz: React.FC = () => {
     if (!started) {
         return (
             <div
-                className="min-h-screen bg-slate-50 relative"
-                style={{ minHeight: "100dvh" }}
+                className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
+                style={{ height: "100vh" }}
             >
                 {/* Background Image */}
                 <div className="fixed inset-0 z-0">
@@ -171,24 +171,24 @@ const Quiz: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto px-4 py-12 relative z-10">
+                <div className="max-w-2xl px-3 sm:px-4 py-8 sm:py-12 relative z-10 overflow-y-auto flex-1">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-8 text-center"
+                        className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 p-6 sm:p-8 text-center"
                     >
-                        <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Trophy className="w-8 h-8 text-blue-400" />
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                            <Trophy className="w-7 h-7 sm:w-8 sm:h-8 text-blue-400" />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-4">
+                        <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
                             Bắt đầu Quiz
                         </h2>
-                        <p className="text-slate-200 mb-6">
+                        <p className="text-sm sm:text-base text-slate-200 mb-5 sm:mb-6">
                             Nhập vị trí bắt đầu và kết thúc
                         </p>
-                        <div className="space-y-4 mb-6">
+                        <div className="space-y-3 sm:space-y-4 mb-5 sm:mb-6">
                             <div>
-                                <label className="block text-sm font-medium text-slate-200 mb-2">
+                                <label className="block text-xs sm:text-sm font-medium text-slate-200 mb-2">
                                     Vị trí bắt đầu
                                 </label>
                                 <input
@@ -206,7 +206,7 @@ const Quiz: React.FC = () => {
                                     }}
                                     placeholder="VD: 1"
                                     min="1"
-                                    className="w-full max-w-xs mx-auto px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 text-center text-base"
+                                    className="w-full max-w-xs mx-auto px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-900 border border-slate-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 text-center text-sm sm:text-base"
                                 />
                                 {isLoadingStart && (
                                     <p className="text-sm text-blue-600 mt-2">
@@ -262,7 +262,7 @@ const Quiz: React.FC = () => {
                                 isLoadingStart ||
                                 isLoadingEnd
                             }
-                            className="px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors font-medium min-h-[48px] active:scale-95 text-base"
+                            className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-lg sm:rounded-xl hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors font-medium min-h-[44px] sm:min-h-[48px] active:scale-98 text-sm sm:text-base"
                         >
                             {isLoadingQuiz ? "Đang tải..." : "Bắt đầu"}
                         </button>
@@ -277,8 +277,8 @@ const Quiz: React.FC = () => {
 
         return (
             <div
-                className="min-h-screen bg-slate-50 relative"
-                style={{ minHeight: "100dvh" }}
+                className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
+                style={{ height: "100vh" }}
             >
                 {/* Background Image */}
                 <div className="fixed inset-0 z-0">
@@ -311,7 +311,7 @@ const Quiz: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto px-4 py-6 relative z-10">
+                <div className="max-w-2xl mx-auto px-4 py-6 relative z-10 overflow-y-auto flex-1">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -392,8 +392,8 @@ const Quiz: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 relative"
-            style={{ minHeight: "100dvh" }}
+            className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
+            style={{ height: "100vh" }}
         >
             {/* Background Image */}
             <div className="fixed inset-0 z-0">
@@ -436,7 +436,7 @@ const Quiz: React.FC = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="max-w-2xl mx-auto px-4 py-6 relative z-10"
+                    className="max-w-2xl px-4 py-6 relative z-10 overflow-y-auto flex-1"
                 >
                     {/* Question */}
                     <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-6 mb-6">

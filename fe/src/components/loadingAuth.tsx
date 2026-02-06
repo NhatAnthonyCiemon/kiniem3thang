@@ -3,12 +3,20 @@ import React from "react";
 
 const LoadingAuth: React.FC = () => {
     return (
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8">
+        <div className="min-h-screen bg-slate-900 flex items-center justify-center px-4 py-8 relative">
+            <div className="fixed inset-0 z-0">
+                <img
+                    src="/bg.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
+            </div>
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="relative bg-white border border-slate-200 shadow-lg rounded-2xl p-10 w-full max-w-md text-center"
+                className="relative z-10 bg-slate-800/90 border border-slate-700 shadow-lg rounded-2xl p-10 w-full max-w-md text-center"
             >
                 {/* 🔐 Animated padlock icon */}
                 <motion.div
@@ -20,7 +28,7 @@ const LoadingAuth: React.FC = () => {
                         duration: 2,
                         ease: "easeInOut",
                     }}
-                    className="mx-auto mb-6 flex items-center justify-center bg-blue-100 rounded-full w-20 h-20"
+                    className="mx-auto mb-6 flex items-center justify-center bg-blue-600/20 rounded-full w-20 h-20"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +36,7 @@ const LoadingAuth: React.FC = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={2}
                         stroke="currentColor"
-                        className="w-10 h-10 text-blue-600"
+                        className="w-10 h-10 text-blue-400"
                     >
                         <path
                             strokeLinecap="round"
@@ -40,7 +48,7 @@ const LoadingAuth: React.FC = () => {
 
                 {/* ✨ Animated loading text */}
                 <motion.h1
-                    className="text-2xl font-bold mb-3 text-slate-800"
+                    className="text-2xl font-bold mb-3 text-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6 }}
@@ -49,7 +57,7 @@ const LoadingAuth: React.FC = () => {
                 </motion.h1>
 
                 <motion.p
-                    className="text-slate-600 text-sm"
+                    className="text-slate-200 text-sm"
                     animate={{ opacity: [0.6, 1, 0.6] }}
                     transition={{
                         duration: 1.8,
@@ -69,11 +77,11 @@ const LoadingAuth: React.FC = () => {
                         repeat: Infinity,
                         ease: "easeInOut",
                     }}
-                    className="mt-6 h-1.5 rounded-full bg-blue-600"
+                    className="mt-6 h-1.5 rounded-full bg-blue-500"
                 />
 
                 {/* 🖋️ Branding (optional) */}
-                <p className="text-xs text-slate-500 mt-8">
+                <p className="text-xs text-slate-400 mt-8">
                     Made with ❤️ by Nguyen Thanh Nhat
                 </p>
             </motion.div>

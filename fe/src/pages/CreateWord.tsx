@@ -111,8 +111,8 @@ const CreateWord: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 pb-2 sm:pb-2"
-            style={{ minHeight: "100dvh" }}
+            className="h-screen bg-slate-50 flex flex-col overflow-hidden"
+            style={{ height: "100vh" }}
         >
             {/* Header */}
             <div className="fixed inset-0 z-0">
@@ -124,19 +124,19 @@ const CreateWord: React.FC = () => {
                 <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
             </div>
 
-            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
-                <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20 flex-shrink-0">
+                <div className="max-w-2xl  px-3 sm:px-4 py-2.5 sm:py-4 flex items-center gap-2 sm:gap-3">
                     <button
                         onClick={() =>
                             step === 1
                                 ? navigate("/dashboard")
                                 : handleBackToSearch()
                         }
-                        className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                        className="p-2 hover:bg-slate-800 rounded-lg transition-colors flex-shrink-0"
                     >
-                        <ArrowLeft className="w-5 h-5 text-slate-200" />
+                        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
                     </button>
-                    <h1 className="text-lg font-semibold text-white">
+                    <h1 className="text-base sm:text-lg font-semibold text-white">
                         {step === 1 ? "Tìm từ vựng" : "Thêm thông tin"}
                     </h1>
                 </div>
@@ -149,10 +149,10 @@ const CreateWord: React.FC = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="max-w-2xl mx-auto px-4 py-6 relative z-10"
+                        className="max-w-2xl  px-3 sm:px-4 py-3 sm:py-6 relative z-10 overflow-y-auto flex-1"
                     >
                         {/* Search Box */}
-                        <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-4 mb-6">
+                        <div className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 px-2.5 py-2.5 sm:p-4 mb-3 sm:mb-6">
                             <div className="relative">
                                 <input
                                     type="text"
@@ -164,7 +164,7 @@ const CreateWord: React.FC = () => {
                                         handleSelectWord(keyword)
                                     }
                                     placeholder="Nhập từ tiếng Anh..."
-                                    className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 pr-24"
+                                    className="w-full px-2 sm:px-4 py-2 sm:py-3 bg-slate-900 border border-slate-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 pr-16 sm:pr-24 text-sm sm:text-base"
                                 />
                                 <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                                     {isSearching && (
@@ -175,7 +175,7 @@ const CreateWord: React.FC = () => {
                                             onClick={() =>
                                                 handleSelectWord(keyword)
                                             }
-                                            className="cursor-pointer px-5 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1"
+                                            className="px-5 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1"
                                         >
                                             Tiếp
                                         </button>
@@ -195,7 +195,7 @@ const CreateWord: React.FC = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="space-y-2"
                             >
-                                <h3 className="text-sm  font-medium text-white px-2 mb-3">
+                                <h3 className="text-xs sm:text-sm font-medium text-white px-2 mb-2 sm:mb-3">
                                     Gợi ý từ vựng
                                 </h3>
                                 {suggestions.map((item: any, index: number) => (
@@ -207,12 +207,12 @@ const CreateWord: React.FC = () => {
                                         onClick={() =>
                                             handleSelectWord(item.word)
                                         }
-                                        className="cursor-pointer w-full bg-slate-800/90 border border-slate-700 rounded-xl p-4 hover:border-blue-500 hover:bg-slate-700 transition-all text-left flex items-center justify-between group"
+                                        className="cursor-pointer w-full bg-slate-800/90 border border-slate-700 rounded-lg sm:rounded-xl px-2.5 py-2 sm:p-4 hover:border-blue-500 hover:bg-slate-700 transition-all text-left flex items-center justify-between group active:scale-98"
                                     >
-                                        <span className="text-white font-medium">
+                                        <span className="text-white font-medium text-sm sm:text-base">
                                             {item.word}
                                         </span>
-                                        <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-blue-400 transition-colors flex-shrink-0" />
                                     </motion.button>
                                 ))}
                             </motion.div>
@@ -243,35 +243,37 @@ const CreateWord: React.FC = () => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="max-w-2xl mx-auto px-4 py-6 relative z-10"
+                        className="max-w-2xl px-3 sm:px-4 py-3 sm:py-6 relative z-10 overflow-y-auto flex-1 pb-6"
                     >
                         {/* Selected Word */}
-                        <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-sm p-6 mb-6 text-white">
-                            <p className="text-sm opacity-90 mb-1">Từ vựng</p>
-                            <div className="flex items-center justify-between gap-4">
-                                <div className="flex-1">
-                                    <h2 className="text-3xl font-bold mb-1">
+                        <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl shadow-sm px-3 py-2.5 sm:p-6 mb-3 sm:mb-6 text-white">
+                            <p className="text-xs sm:text-sm opacity-90 mb-1">
+                                Từ vựng
+                            </p>
+                            <div className="flex items-center justify-between gap-3 sm:gap-4">
+                                <div className="flex-1 min-w-0">
+                                    <h2 className="text-2xl sm:text-3xl font-bold mb-1 break-words">
                                         {selectedWord}
                                     </h2>
                                     {phonetic && (
-                                        <p className="text-sm opacity-90 font-mono">
+                                        <p className="text-xs sm:text-sm opacity-90 font-mono">
                                             {phonetic}
                                         </p>
                                     )}
                                 </div>
                                 <button
                                     onClick={handleSpeak}
-                                    className="p-3 bg-white/20 hover:bg-white/30 rounded-full transition-colors flex-shrink-0"
+                                    className="p-2.5 sm:p-3 bg-white/20 hover:bg-white/30 rounded-full transition-colors flex-shrink-0"
                                     title="Phát âm"
                                 >
-                                    <Volume2 className="w-6 h-6" />
+                                    <Volume2 className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </button>
                             </div>
                         </div>
 
                         {/* Description */}
-                        <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-4 mb-4">
-                            <label className="block text-sm font-medium text-slate-200 mb-2">
+                        <div className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 px-2.5 py-2 sm:p-4 mb-3 sm:mb-4">
+                            <label className="block text-xs sm:text-sm font-medium text-slate-200 mb-2">
                                 Mô tả / Nghĩa{" "}
                                 <span className="text-red-400">*</span>
                             </label>
@@ -280,13 +282,13 @@ const CreateWord: React.FC = () => {
                                 onChange={(e) => setDescription(e.target.value)}
                                 placeholder="Nhập nghĩa tiếng Việt hoặc mô tả..."
                                 rows={3}
-                                className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 resize-none"
+                                className="w-full px-2 sm:px-4 py-2 sm:py-3 bg-slate-900 border border-slate-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 resize-none text-sm sm:text-base"
                             />
                         </div>
 
                         {/* Note */}
-                        <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-4 mb-4">
-                            <label className="block text-sm font-medium text-slate-200 mb-2">
+                        <div className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 px-2.5 py-2 sm:p-4 mb-3 sm:mb-4">
+                            <label className="block text-xs sm:text-sm font-medium text-slate-200 mb-2">
                                 Ghi chú
                             </label>
                             <textarea
@@ -294,42 +296,44 @@ const CreateWord: React.FC = () => {
                                 onChange={(e) => setNote(e.target.value)}
                                 placeholder="Ghi chú cá nhân (không bắt buộc)..."
                                 rows={2}
-                                className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 resize-none"
+                                className="w-full px-2 sm:px-4 py-2 sm:py-3 bg-slate-900 border border-slate-600 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-slate-400 resize-none text-sm sm:text-base"
                             />
                         </div>
 
                         {/* AI Content */}
-                        <div className="bg-slate-800/90 rounded-2xl shadow-sm border border-slate-700 p-4 mb-6">
+                        <div className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 px-2.5 py-2 sm:p-4 mb-3 sm:mb-4">
                             <div className="flex items-center justify-between mb-2">
-                                <label className="block text-sm font-medium text-slate-200">
+                                <label className="block text-xs sm:text-sm font-medium text-slate-200">
                                     Nội dung AI
                                 </label>
                                 <button
                                     onClick={handleGenerateAI}
                                     disabled={isGenerating}
-                                    className="cursor-pointer px-4 py-2 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                    className="px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-600 text-white text-xs sm:text-sm rounded-lg hover:bg-purple-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors flex items-center gap-1.5 sm:gap-2 flex-shrink-0"
                                 >
-                                    <Sparkles className="w-4 h-4" />
-                                    {isGenerating
-                                        ? "Đang tạo..."
-                                        : aiContent
-                                          ? "Tạo lại"
-                                          : "Tạo"}
+                                    <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
+                                    <span className="whitespace-nowrap">
+                                        {isGenerating
+                                            ? "Đang tạo..."
+                                            : aiContent
+                                              ? "Tạo lại"
+                                              : "Tạo"}
+                                    </span>
                                 </button>
                             </div>
                             {aiContent && (
-                                <div className="mt-3 p-4 bg-slate-900 border border-slate-600 rounded-xl text-slate-200 text-sm">
+                                <div className="mt-2 px-2.5 py-2 bg-slate-900 border border-slate-600 rounded-xl text-slate-200 text-sm">
                                     {formatAIContent(aiContent)}
                                 </div>
                             )}
                         </div>
 
                         {/* Save Button */}
-                        <div className=" sm:relative sm:bottom-auto sm:p-0 sm:bg-transparent sm:border-0">
+                        <div className="sm:relative sm:bottom-auto sm:p-0 sm:bg-transparent sm:border-0">
                             <button
                                 onClick={handleSave}
                                 disabled={isSaving || !description.trim()}
-                                className="w-full bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors font-medium text-base min-h-[48px] active:scale-95"
+                                className="w-full bg-blue-600 text-white rounded-lg sm:rounded-xl hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors font-medium text-sm sm:text-base min-h-[44px] sm:min-h-[48px] active:scale-[0.98]"
                             >
                                 {isSaving ? "Đang lưu..." : "Lưu từ vựng"}
                             </button>
