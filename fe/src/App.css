@@ -11,6 +11,16 @@ html,
     -webkit-overflow-scrolling: touch; /* iOS */
 }
 
+.page {
+    min-height: 100dvh;
+}
+
+.page::after {
+    content: "";
+    display: block;
+    height: 1px;
+}
+
 @keyframes fadeInPhoto {
     to {
         opacity: 1;

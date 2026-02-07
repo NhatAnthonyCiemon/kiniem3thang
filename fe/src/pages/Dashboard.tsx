@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <div
-            className="h-screen bg-slate-50 flex flex-col overflow-hidden"
+            className="page bg-slate-50 flex flex-col overflow-hidden"
             style={{
                 height: "100dvh",
                 backgroundImage: `
