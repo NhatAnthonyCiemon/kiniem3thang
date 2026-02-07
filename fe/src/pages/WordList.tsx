@@ -251,7 +251,7 @@ const WordList: React.FC = () => {
                         scrollBehavior: "smooth",
                         height: "1px",
                     }}
-                    className="sm:mx-auto sm:w-[80%] px-4 py-6 relative z-10 flex-1 overflow-y-auto"
+                    className="sm:mx-auto sm:w-[80%] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 py-6 relative z-10 flex-1 overflow-y-auto"
                 >
                     {displayLoading ? (
                         <div className="space-y-3">
