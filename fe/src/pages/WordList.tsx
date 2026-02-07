@@ -189,7 +189,6 @@ const WordList: React.FC = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundAttachment: "scroll" /* QUAN TRỌNG */,
                 }}
             >
                 {/* <div className="fixed inset-0 z-0">
