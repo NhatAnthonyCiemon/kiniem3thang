@@ -337,7 +337,12 @@ const Quiz: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="sm:mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:w-[80%] max-w-2xl  px-4 py-6 relative z-10 overflow-y-auto flex-1">
+                <div
+                    style={{
+                        scrollBehavior: "smooth",
+                    }}
+                    className="sm:mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:w-[80%] max-w-2xl  px-4 py-6 relative z-10 overflow-y-auto flex-1"
+                >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
