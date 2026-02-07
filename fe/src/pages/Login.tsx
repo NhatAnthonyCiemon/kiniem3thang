@@ -35,7 +35,7 @@ const Login: React.FC = () => {
 
                 if (access_token && refresh_token) {
                     login(access_token, refresh_token);
-                    toast.success("Login successful! Redirecting...");
+                    toast.success("Đăng nhập thành công! Đang chuyển hướng...");
                     setTimeout(() => navigate("/dashboard"), 1500);
                 }
             },

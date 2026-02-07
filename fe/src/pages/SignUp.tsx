@@ -67,6 +67,9 @@ const SignUp: React.FC = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
+                style={{
+                    scrollBehavior: "smooth",
+                }}
                 className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative bg-slate-800/95 h-[90dvh] overflow-auto backdrop-blur-sm border border-slate-700 shadow-lg rounded-2xl p-8 w-full max-w-md z-10"
             >
                 <Link
