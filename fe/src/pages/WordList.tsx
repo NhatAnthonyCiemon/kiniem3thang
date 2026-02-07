@@ -178,7 +178,7 @@ const WordList: React.FC = () => {
             <div
                 className="min-h-screen bg-slate-50"
                 style={{
-                    minHeight: "100dvh",
+                    height: "100dvh",
                     backgroundImage: `
                     linear-gradient(
                         rgba(15, 23, 42, 0.55),

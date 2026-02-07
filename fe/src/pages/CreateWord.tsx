@@ -113,7 +113,7 @@ const CreateWord: React.FC = () => {
         <div
             className="h-screen bg-slate-50 flex flex-col overflow-hidden"
             style={{
-                height: "100vh",
+                height: "100dvh",
                 backgroundImage: `
                     linear-gradient(
                         rgba(15, 23, 42, 0.55),

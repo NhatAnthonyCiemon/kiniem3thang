@@ -146,7 +146,7 @@ const Quiz: React.FC = () => {
             <div
                 className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
                 style={{
-                    height: "100vh",
+                    height: "100dvh",
                     backgroundImage: `
                     linear-gradient(
                         rgba(15, 23, 42, 0.55),
@@ -292,7 +292,7 @@ const Quiz: React.FC = () => {
             <div
                 className="h-screen bg-slate-50 relative flex flex-col overflow-hidden"
                 style={{
-                    height: "100vh",
+                    height: "100dvh",
                     backgroundImage: `
                     linear-gradient(
                         rgba(15, 23, 42, 0.55),
