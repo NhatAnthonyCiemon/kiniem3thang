@@ -63,7 +63,6 @@ const Dashboard: React.FC = () => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundAttachment: "scroll" /* QUAN TRỌNG */,
-                overflow: "hidden",
             }}
         >
             {/* Background Image */}
