@@ -3,6 +3,14 @@
     transform: scale(0.96);
     animation: fadeInPhoto 0.7s forwards;
 }
+html,
+* {
+    scroll-behavior: smooth;
+    --webkit-scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    -webkit-overflow-scrolling: touch; /* iOS */
+}
+
 @keyframes fadeInPhoto {
     to {
         opacity: 1;
