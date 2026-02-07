@@ -249,8 +249,9 @@ const WordList: React.FC = () => {
                 <div
                     style={{
                         scrollBehavior: "smooth",
+                        height: "1px",
                     }}
-                    className="max-w-2xl mx-auto px-4 py-6 relative z-10 flex-1 overflow-y-auto"
+                    className="sm:mx-auto sm:w-[80%] px-4 py-6 relative z-10 flex-1 overflow-y-auto"
                 >
                     {displayLoading ? (
                         <div className="space-y-3">
