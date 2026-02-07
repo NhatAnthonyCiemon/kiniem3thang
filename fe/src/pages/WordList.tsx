@@ -176,9 +176,9 @@ const WordList: React.FC = () => {
     return (
         <>
             <div
-                className="min-h-screen bg-slate-50 flex flex-col pb-2"
+                className="min-h-screen bg-slate-50 flex flex-col"
                 style={{
-                    height: "100vh",
+                    height: "100dvh",
                     backgroundImage: `
                     linear-gradient(
                         rgba(15, 23, 42, 0.55),
