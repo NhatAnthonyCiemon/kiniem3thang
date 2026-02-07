@@ -51,7 +51,7 @@ const SignUp: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8 relative"
+            className="min-h-screen bg-slate-900 flex items-center justify-center px-4 py-8 relative"
             style={{ minHeight: "100dvh" }}
         >
             {/* Background Image */}
@@ -61,27 +61,27 @@ const SignUp: React.FC = () => {
                     alt="Background"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+                <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
             </div>
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="relative bg-white/95 backdrop-blur-sm border border-slate-200 shadow-lg rounded-2xl p-8 w-full max-w-md z-10"
+                className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative bg-slate-800/95 h-[90vh] overflow-auto backdrop-blur-sm border border-slate-700 shadow-lg rounded-2xl p-8 w-full max-w-md z-10"
             >
                 <Link
                     to="/"
-                    className="absolute top-5 left-5 flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-medium"
+                    className="absolute top-5 left-5 flex items-center gap-2 text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
                 >
                     <ArrowLeft size={18} />
                     Trang chủ
                 </Link>
 
                 <div className="mb-8 text-center mt-8">
-                    <h1 className="text-3xl font-bold mb-2 text-slate-800">
+                    <h1 className="text-3xl font-bold mb-2 text-slate-100">
                         Đăng ký
                     </h1>
-                    <p className="text-slate-600 text-sm">
+                    <p className="text-slate-300 text-sm">
                         Tạo tài khoản mới để bắt đầu!
                     </p>
                 </div>
@@ -89,7 +89,7 @@ const SignUp: React.FC = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     {/* Email */}
                     <div>
-                        <label className="mb-2 font-medium text-slate-700 text-sm flex items-center gap-2">
+                        <label className="mb-2 font-medium text-slate-200 text-sm flex items-center gap-2">
                             <Mail size={18} /> Email
                         </label>
                         <input
@@ -105,10 +105,10 @@ const SignUp: React.FC = () => {
                             autoCapitalize="none"
                             autoCorrect="off"
                             placeholder="email@example.com"
-                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 text-base"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-700 border border-slate-600 text-slate-100 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 text-base"
                         />
                         {errors.email && (
-                            <p className="text-red-600 text-sm mt-1">
+                            <p className="text-red-400 text-sm mt-1">
                                 {errors.email.message}
                             </p>
                         )}
@@ -116,7 +116,7 @@ const SignUp: React.FC = () => {
 
                     {/* Username */}
                     <div>
-                        <label className="mb-2 font-medium text-slate-700 text-sm flex items-center gap-2">
+                        <label className="mb-2 font-medium text-slate-200 text-sm flex items-center gap-2">
                             <User size={16} /> Tên người dùng
                         </label>
                         <input
@@ -126,7 +126,7 @@ const SignUp: React.FC = () => {
                             type="text"
                             autoCapitalize="words"
                             placeholder="Tên của bạn"
-                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 text-base"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-700 border border-slate-600 text-slate-100 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 text-base"
                         />
                         {errors.username && (
                             <p className="text-red-600 text-sm mt-1">
@@ -137,7 +137,7 @@ const SignUp: React.FC = () => {
 
                     {/* Password */}
                     <div>
-                        <label className="mb-2 font-medium text-slate-700 text-sm flex items-center gap-2">
+                        <label className="mb-2 font-medium text-slate-200 text-sm flex items-center gap-2">
                             <Lock size={16} /> Mật khẩu
                         </label>
                         <div className="relative">
@@ -154,12 +154,12 @@ const SignUp: React.FC = () => {
                                 autoCapitalize="none"
                                 autoCorrect="off"
                                 placeholder="••••••••"
-                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 pr-12 text-base"
+                                className="w-full px-4 py-3 rounded-xl bg-slate-700 border border-slate-600 text-slate-100 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 pr-12 text-base"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword((prev) => !prev)}
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700 transition"
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-200 transition"
                             >
                                 {showPassword ? (
                                     <Eye size={18} />
@@ -169,7 +169,7 @@ const SignUp: React.FC = () => {
                             </button>
                         </div>
                         {errors.password && (
-                            <p className="text-red-600 text-sm mt-1">
+                            <p className="text-red-400 text-sm mt-1">
                                 {errors.password.message}
                             </p>
                         )}
@@ -177,7 +177,7 @@ const SignUp: React.FC = () => {
 
                     {/* Confirm Password */}
                     <div>
-                        <label className="mb-2 font-medium text-slate-700 text-sm flex items-center gap-2">
+                        <label className="mb-2 font-medium text-slate-200 text-sm flex items-center gap-2">
                             <Lock size={16} /> Xác nhận mật khẩu
                         </label>
                         <div className="relative">
@@ -192,14 +192,14 @@ const SignUp: React.FC = () => {
                                 autoCapitalize="none"
                                 autoCorrect="off"
                                 placeholder="••••••••"
-                                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 pr-12 text-base"
+                                className="w-full px-4 py-3 rounded-xl bg-slate-700 border border-slate-600 text-slate-100 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-slate-400 pr-12 text-base"
                             />
                             <button
                                 type="button"
                                 onClick={() =>
                                     setShowConfirmPassword((prev) => !prev)
                                 }
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700 transition"
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-200 transition"
                             >
                                 {showConfirmPassword ? (
                                     <Eye size={18} />
@@ -220,7 +220,7 @@ const SignUp: React.FC = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="flex items-center gap-2 bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-xl"
+                            className="flex items-center gap-2 bg-red-900/30 border border-red-500/50 text-red-300 px-4 py-3 rounded-xl"
                         >
                             <XCircle size={18} />
                             <p className="text-sm">
@@ -235,7 +235,7 @@ const SignUp: React.FC = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="flex items-center gap-2 bg-green-50 border border-green-300 text-green-700 px-4 py-3 rounded-xl"
+                            className="flex items-center gap-2 bg-green-900/30 border border-green-500/50 text-green-300 px-4 py-3 rounded-xl"
                         >
                             <CheckCircle size={18} />
                             <p className="text-sm">
@@ -256,7 +256,7 @@ const SignUp: React.FC = () => {
                         disabled={isPending}
                         className={`w-full py-4 rounded-xl font-semibold text-base mt-6 transition active:scale-95 min-h-[48px] ${
                             isPending
-                                ? "bg-slate-300 cursor-not-allowed text-slate-500"
+                                ? "bg-slate-600 cursor-not-allowed text-slate-400"
                                 : "bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
                         }`}
                     >
@@ -264,11 +264,11 @@ const SignUp: React.FC = () => {
                     </button>
                 </form>
 
-                <p className="text-center text-slate-600 text-sm mt-6">
+                <p className="text-center text-slate-300 text-sm mt-6">
                     Đã có tài khoản?{" "}
                     <Link
                         to="/login"
-                        className="text-blue-600 font-semibold hover:underline"
+                        className="text-blue-400 font-semibold hover:underline"
                     >
                         Đăng nhập
                     </Link>

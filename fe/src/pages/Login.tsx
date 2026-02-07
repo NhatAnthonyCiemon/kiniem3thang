@@ -44,7 +44,7 @@ const Login: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8 relative"
+            className="min-h-screen bg-slate-900 flex items-center justify-center px-4 py-8 relative"
             style={{ minHeight: "100dvh" }}
         >
             {/* Background Image */}
@@ -54,27 +54,27 @@ const Login: React.FC = () => {
                     alt="Background"
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+                <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
             </div>
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="relative bg-white/95 backdrop-blur-sm border border-slate-200 shadow-lg rounded-2xl p-8 w-full max-w-md z-10"
+                className="relative bg-slate-800/95 backdrop-blur-sm border border-slate-700 shadow-lg rounded-2xl p-8 w-full max-w-md z-10"
             >
                 <Link
                     to="/"
-                    className="absolute top-5 left-5 flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-medium"
+                    className="absolute top-5 left-5 flex items-center gap-2 text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
                 >
                     <ArrowLeft size={18} />
                     Trang chủ
                 </Link>
 
                 <div className="mb-8 mt-8 text-center">
-                    <h1 className="text-3xl font-bold mb-2 text-slate-800">
+                    <h1 className="text-3xl font-bold mb-2 text-slate-100">
                         Đăng nhập
                     </h1>
-                    <p className="text-slate-600 text-sm">
+                    <p className="text-slate-300 text-sm">
                         Chào mừng bạn trở lại!
                     </p>
                 </div>
@@ -87,8 +87,8 @@ const Login: React.FC = () => {
                 >
                     {/* Email */}
                     <div>
-                        <label className="mb-2 font-semibold text-slate-800 text-sm flex items-center gap-2">
-                            <Mail size={16} className="text-slate-500" />
+                        <label className="mb-2 font-semibold text-slate-200 text-sm flex items-center gap-2">
+                            <Mail size={16} className="text-slate-400" />
                             Email
                         </label>
                         <input
@@ -104,10 +104,10 @@ const Login: React.FC = () => {
                             autoCapitalize="none"
                             autoCorrect="off"
                             placeholder="email@example.com"
-                            className={`w-full px-4 py-3 rounded-xl bg-white border-2 text-slate-900 outline-none transition-all text-base ${
+                            className={`w-full px-4 py-3 rounded-xl bg-slate-700 border-2 text-slate-100 outline-none transition-all text-base ${
                                 errors.email
-                                    ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
-                                    : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                                    ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-900/30"
+                                    : "border-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-900/30"
                             } placeholder:text-slate-400`}
                         />
                         {errors.email && (
@@ -119,8 +119,8 @@ const Login: React.FC = () => {
 
                     {/* Password */}
                     <div>
-                        <label className="mb-2 font-semibold text-slate-800 text-sm flex items-center gap-2">
-                            <Lock size={16} className="text-slate-500" />
+                        <label className="mb-2 font-semibold text-slate-200 text-sm flex items-center gap-2">
+                            <Lock size={16} className="text-slate-400" />
                             Mật khẩu
                         </label>
                         <div className="relative">
@@ -137,16 +137,16 @@ const Login: React.FC = () => {
                                 autoCapitalize="none"
                                 autoCorrect="off"
                                 placeholder="••••••••"
-                                className={`w-full px-4 py-3 rounded-xl bg-white border-2 text-slate-900 outline-none transition-all pr-12 text-base ${
+                                className={`w-full px-4 py-3 rounded-xl bg-slate-700 border-2 text-slate-100 outline-none transition-all pr-12 text-base ${
                                     errors.password
-                                        ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-100"
-                                        : "border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                                        ? "border-red-400 focus:border-red-500 focus:ring-4 focus:ring-red-900/30"
+                                        : "border-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-900/30"
                                 } placeholder:text-slate-400`}
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700 transition-colors p-1"
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors p-1"
                             >
                                 {showPassword ? (
                                     <Eye size={18} />
@@ -167,7 +167,7 @@ const Login: React.FC = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="flex items-center gap-2 bg-red-50 border-2 border-red-300 text-red-700 px-4 py-3 rounded-xl"
+                            className="flex items-center gap-2 bg-red-900/30 border-2 border-red-500/50 text-red-300 px-4 py-3 rounded-xl"
                         >
                             <XCircle size={18} />
                             <p className="text-sm font-medium">
@@ -183,7 +183,7 @@ const Login: React.FC = () => {
                         disabled={isPending}
                         className={`w-full py-4 rounded-xl font-bold text-base mt-6 transition active:scale-95 min-h-[48px] ${
                             isPending
-                                ? "bg-slate-400 cursor-not-allowed text-slate-200"
+                                ? "bg-slate-600 cursor-not-allowed text-slate-400"
                                 : "bg-blue-600 hover:bg-blue-700 shadow-lg text-white cursor-pointer"
                         }`}
                     >
@@ -191,11 +191,11 @@ const Login: React.FC = () => {
                     </button>
                 </form>
 
-                <p className="text-center text-slate-600 text-sm mt-6">
+                <p className="text-center text-slate-300 text-sm mt-6">
                     Chưa có tài khoản?{" "}
                     <Link
                         to="/signup"
-                        className="text-blue-600 font-semibold hover:underline hover:text-blue-700"
+                        className="text-blue-400 font-semibold hover:underline hover:text-blue-300"
                     >
                         Đăng ký
                     </Link>
