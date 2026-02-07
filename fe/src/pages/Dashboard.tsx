@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <div
-            className="page bg-slate-50 flex flex-col overflow-hidden"
+            className="page bg-slate-50 flex flex-col"
             style={{
                 height: "100dvh",
                 backgroundImage: `
@@ -63,6 +63,7 @@ const Dashboard: React.FC = () => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundAttachment: "scroll" /* QUAN TRỌNG */,
+                overflow: "hidden",
             }}
         >
             {/* Background Image */}
