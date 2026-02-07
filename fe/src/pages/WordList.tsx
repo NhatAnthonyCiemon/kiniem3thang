@@ -176,9 +176,10 @@ const WordList: React.FC = () => {
     return (
         <>
             <div
-                className="min-h-screen bg-slate-50"
+                className="min-h-screen bg-slate-50 flex flex-col"
                 style={{
-                    minHeight: "100dvh",
+                    overflow: "auto",
+                    height: "100dvh",
                     backgroundImage: `
                     linear-gradient(
                         rgba(15, 23, 42, 0.55),
@@ -247,7 +248,12 @@ const WordList: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto px-4 py-6 relative z-10">
+                <div
+                    style={{
+                        scrollBehavior: "smooth",
+                    }}
+                    className="max-w-2xl mx-auto px-4 py-6 relative z-10 flex-1 overflow-y-auto"
+                >
                     {displayLoading ? (
                         <div className="space-y-3">
                             {[...Array(5)].map((_, i) => (

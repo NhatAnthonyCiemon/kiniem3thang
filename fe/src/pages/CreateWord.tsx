@@ -162,6 +162,9 @@ const CreateWord: React.FC = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
+                        style={{
+                            scrollBehavior: "smooth",
+                        }}
                         className="sm:mx-auto sm:w-[80%] px-3 sm:px-4 py-3 sm:py-6 relative z-10 flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                     >
                         {/* Search Box */}
