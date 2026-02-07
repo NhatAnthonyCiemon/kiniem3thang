@@ -18,7 +18,12 @@ axiosInstance.interceptors.response.use(
         const original = error.config;
         const auth = getAuthContext();
         console.log("Axios error:", error.response || error.message);
-        if (error.response?.status === 401 && !original._retry && auth) {
+        if (
+            error.response?.status === 401 &&
+            !original._retry &&
+            auth &&
+            original.url !== "/user/refresh"
+        ) {
             original._retry = true;
             await auth.refreshAccessToken();
 
