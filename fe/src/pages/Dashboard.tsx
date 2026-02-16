@@ -79,7 +79,7 @@ const Dashboard: React.FC = () => {
                 <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
                     <div>
                         <h1 className="text-xl font-bold text-white">
-                            Học từ vựng của Thanh Chiều
+                            Học từ vựng cùng Thanh Chiều
                         </h1>
                         {user && (
                             <p className="text-sm text-slate-200 mt-1">
