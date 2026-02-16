@@ -3,15 +3,23 @@ import React from "react";
 
 const LoadingAuth: React.FC = () => {
     return (
-        <div className="min-h-screen bg-slate-900 flex items-center justify-center px-4 py-8 relative">
-            <div className="fixed inset-0 z-0">
-                <img
-                    src="/bg.jpg"
-                    alt="Background"
-                    className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
-            </div>
+        <div
+            className="min-h-screen flex items-center justify-center px-4 py-8 relative"
+            style={{
+                height: "100dvh",
+                backgroundImage: `
+                    linear-gradient(
+                        rgba(15, 23, 42, 0.55),
+                        rgba(15, 23, 42, 0.55)
+                    ),
+                    url('/bg.jpg')
+                    `,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundAttachment: "scroll" /* QUAN TRỌNG */,
+            }}
+        >
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
