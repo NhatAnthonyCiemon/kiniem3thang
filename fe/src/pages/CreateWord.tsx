@@ -19,7 +19,7 @@ const CreateWord: React.FC = () => {
     const [aiContent, setAiContent] = useState("");
 
     // Debounce keyword để tránh gọi API quá nhiều
-    const debouncedKeyword = useDebounce(keyword, 500);
+    const debouncedKeyword = useDebounce(keyword, 200);
 
     const { data: suggestions, isLoading: isSearching } =
         useWordSuggestions(debouncedKeyword);
