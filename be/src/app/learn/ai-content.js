@@ -32,7 +32,7 @@ Giải thích ý nghĩa của từ bằng tiếng Việt, ngắn gọn và dễ 
 2. Synonyms  
 Liệt kê các từ đồng nghĩa phổ biến.
 Ghi rõ từ loại của từng từ (ví dụ: (n), (v), (adj), (adv)...).
-Nêu rõ sự khác biệt trong các dùng nếu có
+Nêu rõ sự khác biệt trong cách dùng(một cách chi tiết nếu có)
 Nếu không có từ đồng nghĩa phù hợp, ghi: Không có.
 
 3. Usage  
@@ -42,7 +42,7 @@ Sau mỗi câu ví dụ, giải thích rõ nghĩa của câu đó bằng tiếng
 
 4. Word Forms & Part of Speech  
 Nêu rõ từ loại của từ đã cho (noun, verb, adjective, etc.).
-Liệt kê các dạng từ liên quan khác (nếu có).
+Liệt kê các dạng từ liên quan khác (nếu có)
 Với mỗi dạng từ, ghi rõ:
 - Từ loại
 - Nghĩa tiếng Việt của dạng từ đó
