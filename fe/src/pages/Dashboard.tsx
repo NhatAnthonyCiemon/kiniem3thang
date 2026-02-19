@@ -105,7 +105,12 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Menu Grid */}
-            <div className="max-w-2xl sm:mx-auto sm:w-[80%] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 py-8 relative z-10 flex-1 overflow-y-auto">
+            <div
+                style={{
+                    scrollBehavior: "smooth",
+                }}
+                className="max-w-2xl sm:mx-auto sm:w-[80%] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 py-8 relative z-10 flex-1 overflow-y-auto"
+            >
                 {isLoading ? (
                     <div className="space-y-4">
                         {[...Array(3)].map((_, i) => (
