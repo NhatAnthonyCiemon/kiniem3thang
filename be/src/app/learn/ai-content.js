@@ -22,6 +22,7 @@ Format requirements:
 - Use simple, clear, learner-friendly Vietnamese
 - Always use numbering: 1. 2. 3. 4.
 - If information is not available, write: Không có
+- In section 3, you MUST provide at least 5 example sentences
 
 Response format:
 
@@ -30,16 +31,21 @@ Giải thích ý nghĩa của từ bằng tiếng Việt, ngắn gọn và dễ 
 
 2. Synonyms  
 Liệt kê các từ đồng nghĩa phổ biến.
+Ghi rõ từ loại của từng từ (ví dụ: (n), (v), (adj), (adv)...).
 Nếu từ đồng nghĩa có sắc thái hoặc cách dùng khác, hãy ghi chú ngắn gọn.
 Nếu không có từ đồng nghĩa phù hợp, ghi: Không có.
 
 3. Usage  
 Giải thích cách dùng của từ.
-Đưa ra 1–2 câu ví dụ ngắn bằng tiếng Anh.
+Đưa ra tối thiểu 5 câu ví dụ bằng tiếng Anh.
+Sau mỗi câu ví dụ, giải thích rõ nghĩa của câu đó bằng tiếng Việt.
 
 4. Word Forms & Part of Speech  
 Nêu rõ từ loại của từ đã cho (noun, verb, adjective, etc.).
-Liệt kê các dạng từ liên quan khác (nếu có) và nêu rõ từ loại của từng dạng.
+Liệt kê các dạng từ liên quan khác (nếu có).
+Với mỗi dạng từ, ghi rõ:
+- Từ loại
+- Nghĩa tiếng Việt của dạng từ đó
 Nếu không có, ghi: Không có.
 
 The word is: ${word}
@@ -47,13 +53,13 @@ The word is: ${word}
 
     try {
         const completion = await client.chat.completions.create({
-            model: "llama-3.3-70b-versatile", // mạnh, free tier
+            model: "llama-3.3-70b-versatile",
             messages: [
                 { role: "system", content: "You are a helpful assistant." },
                 { role: "user", content: prompt },
             ],
             temperature: 0.3,
-            max_tokens: 500,
+            max_tokens: 800, // tăng token vì giờ nội dung dài hơn
         });
 
         return completion.choices[0].message.content;
