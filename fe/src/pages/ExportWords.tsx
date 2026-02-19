@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-    ArrowLeft,
-    FileText,
-    Download,
-    FileDown,
-    FileType,
-} from "lucide-react";
+import { ArrowLeft, Download, FileDown, FileType } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWordByOrder } from "../hooks/useWordByOrder";
 import axiosInstance from "../api/axiosInstance";
@@ -487,7 +481,6 @@ const ExportWords: React.FC = () => {
                         <ArrowLeft className="w-5 h-5 text-slate-200" />
                     </button>
                     <div className="flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-blue-400" />
                         <h1 className="text-lg font-semibold text-white">
                             Xuất danh sách từ vựng
                         </h1>
