@@ -20,7 +20,7 @@ import {
     HeadingLevel,
 } from "docx";
 import { saveAs } from "file-saver";
-import jsPDF from "jspdf";
+import html2pdf from "html2pdf.js";
 
 interface Word {
     id: number;
@@ -298,124 +298,141 @@ const ExportWords: React.FC = () => {
         if (words.length === 0) return;
 
         try {
-            const doc = new jsPDF();
-            let yPosition = 20;
-            const pageHeight = doc.internal.pageSize.height;
-            const marginBottom = 20;
+            // Create HTML content
+            const content = document.createElement("div");
+            content.style.fontFamily = "'Times New Roman', Times, serif";
+            content.style.padding = "30px";
+            content.style.color = "#000";
+            content.style.fontSize = "12pt";
+            content.style.lineHeight = "1.6";
 
             // Title
-            doc.setFontSize(20);
-            doc.setFont("helvetica", "bold");
-            doc.text(`DANH SACH TU VUNG (${words.length} tu)`, 105, yPosition, {
-                align: "center",
-            });
-            yPosition += 10;
+            const title = document.createElement("h1");
+            title.style.textAlign = "center";
+            title.style.fontSize = "20pt";
+            title.style.fontWeight = "bold";
+            title.style.marginBottom = "8px";
+            title.textContent = `DANH SÁCH TỪ VỰNG (${words.length} từ)`;
+            content.appendChild(title);
 
             // Subtitle
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            doc.text(`Tu vi tri ${startPos} den ${endPos}`, 105, yPosition, {
-                align: "center",
-            });
-            yPosition += 7;
+            const subtitle = document.createElement("p");
+            subtitle.style.textAlign = "center";
+            subtitle.style.fontSize = "12pt";
+            subtitle.style.marginBottom = "5px";
+            subtitle.textContent = `Từ vị trí ${startPos} đến ${endPos}`;
+            content.appendChild(subtitle);
 
-            doc.setFontSize(10);
-            doc.text(
-                `Che do: ${exportMode === "simple" ? "Don gian" : "Day du"} | Xuat luc: ${new Date().toLocaleString("vi-VN")}`,
-                105,
-                yPosition,
-                { align: "center" },
-            );
-            yPosition += 15;
+            // Info
+            const info = document.createElement("p");
+            info.style.textAlign = "center";
+            info.style.fontSize = "10pt";
+            info.style.fontStyle = "italic";
+            info.style.marginBottom = "20px";
+            info.textContent = `Chế độ: ${exportMode === "simple" ? "Đơn giản" : "Đầy đủ"} | Xuất lúc: ${new Date().toLocaleString("vi-VN")}`;
+            content.appendChild(info);
+
+            // Separator
+            const hr = document.createElement("hr");
+            hr.style.border = "none";
+            hr.style.borderTop = "2px solid #333";
+            hr.style.marginBottom = "20px";
+            content.appendChild(hr);
 
             // Words
             words.forEach((word, index) => {
-                // Check if need new page
-                if (yPosition > pageHeight - marginBottom) {
-                    doc.addPage();
-                    yPosition = 20;
-                }
+                // Word container
+                const wordDiv = document.createElement("div");
+                wordDiv.style.marginBottom = "20px";
+                wordDiv.style.pageBreakInside = "avoid";
 
-                // Word number and title
-                doc.setFontSize(14);
-                doc.setFont("helvetica", "bold");
-                doc.text(
-                    `${index + 1}. ${word.word.toUpperCase()}`,
-                    20,
-                    yPosition,
-                );
-                yPosition += 8;
+                // Word title
+                const wordTitle = document.createElement("h2");
+                wordTitle.style.fontSize = "14pt";
+                wordTitle.style.fontWeight = "bold";
+                wordTitle.style.color = "#1E40AF";
+                wordTitle.style.marginBottom = "8px";
+                wordTitle.textContent = `${index + 1}. ${word.word.toUpperCase()}`;
+                wordDiv.appendChild(wordTitle);
 
                 // Description
                 if (word.description) {
-                    doc.setFontSize(11);
-                    doc.setFont("helvetica", "bold");
-                    doc.text("Nghia: ", 25, yPosition);
-
-                    doc.setFont("helvetica", "normal");
-                    const descLines = doc.splitTextToSize(
-                        word.description,
-                        160,
+                    const descP = document.createElement("p");
+                    descP.style.marginLeft = "15px";
+                    descP.style.marginBottom = "8px";
+                    const descLabel = document.createElement("strong");
+                    descLabel.textContent = "Nghĩa: ";
+                    descP.appendChild(descLabel);
+                    descP.appendChild(
+                        document.createTextNode(word.description),
                     );
-                    doc.text(descLines, 45, yPosition);
-                    yPosition += descLines.length * 6 + 3;
+                    wordDiv.appendChild(descP);
                 }
 
-                // Only add note and ai_content in full mode
+                // Full mode - Note & AI Content
                 if (exportMode === "full") {
-                    // Note
                     if (word.note) {
-                        if (yPosition > pageHeight - marginBottom) {
-                            doc.addPage();
-                            yPosition = 20;
-                        }
-
-                        doc.setFontSize(11);
-                        doc.setFont("helvetica", "bold");
-                        doc.text("Ghi chu: ", 25, yPosition);
-
-                        doc.setFont("helvetica", "italic");
-                        const noteLines = doc.splitTextToSize(word.note, 160);
-                        doc.text(noteLines, 45, yPosition);
-                        yPosition += noteLines.length * 6 + 3;
+                        const noteP = document.createElement("p");
+                        noteP.style.marginLeft = "15px";
+                        noteP.style.marginBottom = "8px";
+                        noteP.style.fontStyle = "italic";
+                        const noteLabel = document.createElement("strong");
+                        noteLabel.textContent = "Ghi chú: ";
+                        noteP.appendChild(noteLabel);
+                        noteP.appendChild(document.createTextNode(word.note));
+                        wordDiv.appendChild(noteP);
                     }
 
-                    // AI Content
                     if (word.ai_content) {
-                        if (yPosition > pageHeight - marginBottom) {
-                            doc.addPage();
-                            yPosition = 20;
-                        }
+                        const aiDiv = document.createElement("div");
+                        aiDiv.style.marginLeft = "15px";
+                        aiDiv.style.marginBottom = "8px";
+                        const aiLabel = document.createElement("strong");
+                        aiLabel.textContent = "AI Content:";
+                        aiDiv.appendChild(aiLabel);
 
-                        doc.setFontSize(11);
-                        doc.setFont("helvetica", "bold");
-                        doc.text("AI Content:", 25, yPosition);
-                        yPosition += 6;
+                        const aiContent = document.createElement("pre");
+                        aiContent.style.fontFamily =
+                            "'Times New Roman', Times, serif";
+                        aiContent.style.fontSize = "10pt";
+                        aiContent.style.whiteSpace = "pre-wrap";
+                        aiContent.style.marginTop = "5px";
+                        aiContent.style.marginLeft = "10px";
+                        aiContent.textContent = word.ai_content;
+                        aiDiv.appendChild(aiContent);
 
-                        doc.setFont("helvetica", "normal");
-                        doc.setFontSize(10);
-                        const aiLines = word.ai_content.split("\n");
-                        aiLines.forEach((line) => {
-                            if (yPosition > pageHeight - marginBottom) {
-                                doc.addPage();
-                                yPosition = 20;
-                            }
-                            const wrappedLines = doc.splitTextToSize(
-                                line || " ",
-                                165,
-                            );
-                            doc.text(wrappedLines, 25, yPosition);
-                            yPosition += wrappedLines.length * 5;
-                        });
-                        yPosition += 3;
+                        wordDiv.appendChild(aiDiv);
                     }
                 }
 
-                yPosition += 5; // Space between words
+                content.appendChild(wordDiv);
             });
 
-            doc.save(`tu-vung-${startPos}-${endPos}.pdf`);
-            toast.success("Đã xuất file PDF thành công!");
+            // PDF options
+            const opt = {
+                margin: [15, 15, 15, 15] as [number, number, number, number],
+                filename: `tu-vung-${startPos}-${endPos}.pdf`,
+                image: { type: "jpeg" as const, quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: {
+                    unit: "mm" as const,
+                    format: "a4" as const,
+                    orientation: "portrait" as const,
+                },
+            };
+
+            // Generate PDF
+            html2pdf()
+                .set(opt)
+                .from(content)
+                .save()
+                .then(() => {
+                    toast.success("Đã xuất file PDF thành công!");
+                })
+                .catch((error: Error) => {
+                    console.error("Error exporting PDF:", error);
+                    toast.error("Có lỗi khi xuất file PDF!");
+                });
         } catch (error) {
             console.error("Error exporting PDF:", error);
             toast.error("Có lỗi khi xuất file PDF!");
@@ -623,21 +640,21 @@ const ExportWords: React.FC = () => {
                             <div className="flex flex-wrap gap-2">
                                 <button
                                     onClick={handleExportWord}
-                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                                 >
                                     <FileDown className="w-4 h-4" />
                                     <span>Xuất Word</span>
                                 </button>
                                 <button
                                     onClick={handleExportText}
-                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                                 >
                                     <Download className="w-4 h-4" />
                                     <span>Xuất TXT</span>
                                 </button>
                                 <button
                                     onClick={handleExportPDF}
-                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                                 >
                                     <FileType className="w-4 h-4" />
                                     <span>Xuất PDF</span>
