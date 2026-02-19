@@ -7,6 +7,7 @@ import CreateWord from "./pages/CreateWord";
 import WordList from "./pages/WordList";
 import Quiz from "./pages/Quiz";
 import LoveMessage from "./pages/LoveMessage";
+import ExportWords from "./pages/ExportWords";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import { Outlet } from "react-router-dom";
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
                     { path: "/create-word", element: <CreateWord /> },
                     { path: "/words", element: <WordList /> },
                     { path: "/quiz", element: <Quiz /> },
+                    { path: "/export-words", element: <ExportWords /> },
                     { path: "/love-message", element: <LoveMessage /> },
                 ],
             },

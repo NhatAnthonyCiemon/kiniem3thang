@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LogOut, BookOpen, List, Brain, Heart } from "lucide-react";
+import { LogOut, BookOpen, List, Brain, Heart, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/useAuthContext";
 import { useUser } from "../hooks/useUser";
@@ -37,6 +37,13 @@ const Dashboard: React.FC = () => {
             description: "Kiểm tra kiến thức của bạn",
             color: "from-orange-500 to-red-500",
             path: "/quiz",
+        },
+        {
+            icon: FileText,
+            title: "Xuất danh sách từ",
+            description: "Xem và tải về danh sách từ vựng",
+            color: "from-green-500 to-emerald-500",
+            path: "/export-words",
         },
         {
             icon: Heart,

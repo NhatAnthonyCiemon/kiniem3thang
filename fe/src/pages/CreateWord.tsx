@@ -297,7 +297,7 @@ const CreateWord: React.FC = () => {
                         </div>
 
                         {/* Existing Word Info Banner */}
-                        {wordExists?.exists && (
+                        {wordExists?.exists && wordExists.words && (
                             <motion.div
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -307,8 +307,8 @@ const CreateWord: React.FC = () => {
                                     <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 flex-shrink-0 mt-0.5" />
                                     <div className="flex-1">
                                         <p className="text-sm sm:text-base font-medium text-yellow-100 mb-1">
-                                            Từ này đã tồn tại (vị trí #
-                                            {wordExists.order})
+                                            Từ này đã tồn tại (
+                                            {wordExists.count} lần)
                                         </p>
                                         <p className="text-xs sm:text-sm text-yellow-200/80">
                                             Thông tin dưới đây để tham khảo. Bạn
@@ -317,33 +317,58 @@ const CreateWord: React.FC = () => {
                                         </p>
                                     </div>
                                 </div>
-                                {wordExists.wordData && (
-                                    <div className="space-y-2 mt-3 pl-7">
-                                        {wordExists.wordData.description && (
-                                            <div>
-                                                <p className="text-xs text-yellow-200/70 mb-1">
-                                                    Mô tả hiện tại:
-                                                </p>
-                                                <p className="text-sm text-yellow-100 bg-black/20 rounded-lg px-3 py-2">
-                                                    {
-                                                        wordExists.wordData
-                                                            .description
-                                                    }
-                                                </p>
+
+                                {/* Danh sách các từ trùng */}
+                                <div className="space-y-3 mt-3">
+                                    {wordExists.words.map((wordData: any) => (
+                                        <div
+                                            key={wordData.id}
+                                            className="bg-black/20 rounded-lg p-3 border border-yellow-500/30"
+                                        >
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span className="text-xs font-mono text-yellow-300 bg-yellow-900/30 px-2 py-0.5 rounded">
+                                                    Vị trí #{wordData.order}
+                                                </span>
+                                                <span className="text-xs text-yellow-200/60">
+                                                    ID: {wordData.id}
+                                                </span>
                                             </div>
-                                        )}
-                                        {wordExists.wordData.note && (
-                                            <div>
-                                                <p className="text-xs text-yellow-200/70 mb-1">
-                                                    Ghi chú hiện tại:
-                                                </p>
-                                                <p className="text-sm text-yellow-100 bg-black/20 rounded-lg px-3 py-2">
-                                                    {wordExists.wordData.note}
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
+
+                                            {wordData.description && (
+                                                <div className="mb-2">
+                                                    <p className="text-xs text-yellow-200/70 mb-1">
+                                                        Mô tả:
+                                                    </p>
+                                                    <p className="text-sm text-yellow-100">
+                                                        {wordData.description}
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            {wordData.note && (
+                                                <div className="mb-2">
+                                                    <p className="text-xs text-yellow-200/70 mb-1">
+                                                        Ghi chú:
+                                                    </p>
+                                                    <p className="text-sm text-yellow-100 italic">
+                                                        {wordData.note}
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            {wordData.ai_content && (
+                                                <div>
+                                                    <p className="text-xs text-yellow-200/70 mb-1">
+                                                        AI Content:
+                                                    </p>
+                                                    <p className="text-xs text-yellow-100 line-clamp-2">
+                                                        {wordData.ai_content}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
                             </motion.div>
                         )}
 

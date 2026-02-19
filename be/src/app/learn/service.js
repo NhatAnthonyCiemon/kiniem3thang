@@ -125,8 +125,8 @@ const wordService = {
         return word.length > 0 ? word[0] : null;
     },
     checkWordExists: async (userId, word) => {
-        // Tìm từ trong database của user
-        const existingWord = await prisma.words.findFirst({
+        // Tìm tất cả các từ trùng nhau trong database của user
+        const existingWords = await prisma.words.findMany({
             where: {
                 user_id: userId,
                 word: {
@@ -134,33 +134,44 @@ const wordService = {
                     mode: "insensitive", // case-insensitive comparison
                 },
             },
-        });
-
-        if (!existingWord) {
-            return {
-                exists: false,
-                order: null,
-                wordData: null,
-            };
-        }
-
-        // Đếm số từ có id lớn hơn id của từ này
-        const countWordsAbove = await prisma.words.count({
-            where: {
-                user_id: userId,
-                id: {
-                    gt: existingWord.id,
-                },
+            orderBy: {
+                id: "desc", // Sắp xếp từ mới nhất xuống
             },
         });
 
-        // Order = số từ có id lớn hơn + 1
-        const order = countWordsAbove + 1;
+        if (existingWords.length === 0) {
+            return {
+                exists: false,
+                count: 0,
+                words: [],
+            };
+        }
+
+        // Tính order cho từng từ
+        const wordsWithOrder = await Promise.all(
+            existingWords.map(async (existingWord) => {
+                // Đếm số từ có id lớn hơn id của từ này
+                const countWordsAbove = await prisma.words.count({
+                    where: {
+                        user_id: userId,
+                        id: {
+                            gt: existingWord.id,
+                        },
+                    },
+                });
+
+                // Order = số từ có id lớn hơn + 1
+                return {
+                    ...existingWord,
+                    order: countWordsAbove + 1,
+                };
+            }),
+        );
 
         return {
             exists: true,
-            order: order,
-            wordData: existingWord,
+            count: wordsWithOrder.length,
+            words: wordsWithOrder,
         };
     },
 };

@@ -137,19 +137,23 @@ router.get(
 
 /**
  * @route   GET /learn/words/check?word=example
- * @desc    Check if a word exists in user's vocabulary and return its order position
+ * @desc    Check if a word exists in user's vocabulary and return its order positions
  * @access  Private (requires authentication)
  * @query   word - The word to check (required)
- * @returns Object with exists status, order (position from newest), and word data
+ * @returns Object with exists status, count, and array of matching words with their order positions
  * @example
  * GET /learn/words/check?word=apple
  * Response:
  * {
  *   "exists": true,
- *   "order": 5,
- *   "wordData": { id: 15, word: "apple", description: "...", ... }
+ *   "count": 2,
+ *   "words": [
+ *     { id: 25, word: "apple", description: "...", order: 3, ... },
+ *     { id: 15, word: "apple", description: "...", order: 12, ... }
+ *   ]
  * }
  * Order represents position from newest (1 = newest word, 2 = second newest, etc.)
+ * If the same word is saved multiple times, all instances are returned
  */
 router.get(
     "/words/check",
