@@ -139,19 +139,19 @@ const CreateWord: React.FC = () => {
                 <div className="absolute inset-0 bg-black/40 backdrop-blur"></div>
             </div> */}
 
-            <div className="border-b border-slate-700 sticky top-0 z-20 flex-shrink-0">
-                <div className="max-w-2xl  px-3 sm:px-4 py-2.5 sm:py-4 flex items-center gap-2 sm:gap-3">
+            <div className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-20">
+                <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
                     <button
                         onClick={() =>
                             step === 1
                                 ? navigate("/dashboard")
                                 : handleBackToSearch()
                         }
-                        className="p-2 hover:bg-slate-800 rounded-lg transition-colors flex-shrink-0"
+                        className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
                     >
-                        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
+                        <ArrowLeft className="w-5 h-5 text-slate-200" />
                     </button>
-                    <h1 className="text-base sm:text-lg font-semibold text-white">
+                    <h1 className="text-lg font-semibold text-white">
                         {step === 1 ? "Tìm từ vựng" : "Thêm thông tin"}
                     </h1>
                 </div>
