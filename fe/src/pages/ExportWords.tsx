@@ -33,6 +33,7 @@ const ExportWords: React.FC = () => {
     const [words, setWords] = useState<Word[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [exportMode, setExportMode] = useState<"simple" | "full">("full"); // simple = từ + nghĩa, full = tất cả
 
     const startPosNum = parseInt(startPos) || 0;
     const endPosNum = parseInt(endPos) || 0;
@@ -97,6 +98,7 @@ const ExportWords: React.FC = () => {
 
         let textContent = `DANH SÁCH TỪ VỰNG (${words.length} từ)\n`;
         textContent += `Từ vị trí ${startPos} đến ${endPos}\n`;
+        textContent += `Chế độ: ${exportMode === "simple" ? "Đơn giản" : "Đầy đủ"}\n`;
         textContent += `Xuất lúc: ${new Date().toLocaleString("vi-VN")}\n`;
         textContent += "=".repeat(50) + "\n\n";
 
@@ -105,11 +107,15 @@ const ExportWords: React.FC = () => {
             if (word.description) {
                 textContent += `   Nghĩa: ${word.description}\n`;
             }
-            if (word.note) {
-                textContent += `   Ghi chú: ${word.note}\n`;
-            }
-            if (word.ai_content) {
-                textContent += `   AI Content:\n   ${word.ai_content.replace(/\n/g, "\n   ")}\n`;
+
+            // Chỉ thêm note và ai_content nếu ở chế độ đầy đủ
+            if (exportMode === "full") {
+                if (word.note) {
+                    textContent += `   Ghi chú: ${word.note}\n`;
+                }
+                if (word.ai_content) {
+                    textContent += `   AI Content:\n   ${word.ai_content.replace(/\n/g, "\n   ")}\n`;
+                }
             }
             textContent += "\n";
         });
@@ -162,7 +168,7 @@ const ExportWords: React.FC = () => {
                 new Paragraph({
                     children: [
                         new TextRun({
-                            text: `Xuất lúc: ${new Date().toLocaleString("vi-VN")}`,
+                            text: `Chế độ: ${exportMode === "simple" ? "Đơn giản" : "Đầy đủ"} | Xuất lúc: ${new Date().toLocaleString("vi-VN")}`,
                             italics: true,
                             size: 20,
                         }),
@@ -207,48 +213,51 @@ const ExportWords: React.FC = () => {
                     );
                 }
 
-                // Note
-                if (word.note) {
-                    children.push(
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: "Ghi chú: ",
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: word.note,
-                                    italics: true,
-                                }),
-                            ],
-                            spacing: { after: 100 },
-                        }),
-                    );
-                }
-
-                // AI Content
-                if (word.ai_content) {
-                    children.push(
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: "AI Content:",
-                                    bold: true,
-                                }),
-                            ],
-                            spacing: { after: 50 },
-                        }),
-                    );
-
-                    const aiLines = word.ai_content.split("\n");
-                    aiLines.forEach((line) => {
+                // Chỉ thêm note và ai_content nếu ở chế độ đầy đủ
+                if (exportMode === "full") {
+                    // Note
+                    if (word.note) {
                         children.push(
                             new Paragraph({
-                                text: line || " ",
+                                children: [
+                                    new TextRun({
+                                        text: "Ghi chú: ",
+                                        bold: true,
+                                    }),
+                                    new TextRun({
+                                        text: word.note,
+                                        italics: true,
+                                    }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                        );
+                    }
+
+                    // AI Content
+                    if (word.ai_content) {
+                        children.push(
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: "AI Content:",
+                                        bold: true,
+                                    }),
+                                ],
                                 spacing: { after: 50 },
                             }),
                         );
-                    });
+
+                        const aiLines = word.ai_content.split("\n");
+                        aiLines.forEach((line) => {
+                            children.push(
+                                new Paragraph({
+                                    text: line || " ",
+                                    spacing: { after: 50 },
+                                }),
+                            );
+                        });
+                    }
                 }
 
                 // Separator
@@ -399,6 +408,45 @@ const ExportWords: React.FC = () => {
                             )}
                         </div>
 
+                        {/* Export Mode Selection */}
+                        <div>
+                            <label className="block text-sm font-medium text-slate-200 mb-3">
+                                Chế độ xuất
+                            </label>
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => setExportMode("simple")}
+                                    className={`cursor-pointer flex-1 px-4 py-3 rounded-xl border-2 transition-all ${
+                                        exportMode === "simple"
+                                            ? "border-blue-500 bg-blue-500/20 text-white"
+                                            : "border-slate-600 bg-slate-900 text-slate-300 hover:border-slate-500"
+                                    }`}
+                                >
+                                    <div className="text-sm font-medium mb-1">
+                                        Đơn giản
+                                    </div>
+                                    <div className="text-xs opacity-70">
+                                        Từ + Nghĩa
+                                    </div>
+                                </button>
+                                <button
+                                    onClick={() => setExportMode("full")}
+                                    className={`cursor-pointer flex-1 px-4 py-3 rounded-xl border-2 transition-all ${
+                                        exportMode === "full"
+                                            ? "border-blue-500 bg-blue-500/20 text-white"
+                                            : "border-slate-600 bg-slate-900 text-slate-300 hover:border-slate-500"
+                                    }`}
+                                >
+                                    <div className="text-sm font-medium mb-1">
+                                        Đầy đủ
+                                    </div>
+                                    <div className="text-xs opacity-70">
+                                        Tất cả thông tin
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
                         <button
                             onClick={handleLoad}
                             disabled={
@@ -429,7 +477,12 @@ const ExportWords: React.FC = () => {
                                     Tìm thấy {words.length} từ vựng
                                 </p>
                                 <p className="text-xs text-slate-400 mt-1">
-                                    Từ vị trí {startPos} đến {endPos}
+                                    Từ vị trí {startPos} đến {endPos} • Chế độ:{" "}
+                                    <span className="text-blue-400 font-medium">
+                                        {exportMode === "simple"
+                                            ? "Đơn giản"
+                                            : "Đầy đủ"}
+                                    </span>
                                 </p>
                             </div>
                             <div className="flex flex-wrap gap-2">
@@ -483,7 +536,7 @@ const ExportWords: React.FC = () => {
                                     </div>
                                 )}
 
-                                {word.note && (
+                                {exportMode === "full" && word.note && (
                                     <div className="mb-3">
                                         <p className="text-xs text-slate-400 mb-1">
                                             Ghi chú:
@@ -494,7 +547,7 @@ const ExportWords: React.FC = () => {
                                     </div>
                                 )}
 
-                                {word.ai_content && (
+                                {exportMode === "full" && word.ai_content && (
                                     <div>
                                         <p className="text-xs text-slate-400 mb-1">
                                             AI Content:
