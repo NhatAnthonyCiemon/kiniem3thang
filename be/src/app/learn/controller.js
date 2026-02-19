@@ -315,6 +315,36 @@ const learnController = {
                 .json(createErrorResponse(500, "Internal server error"));
         }
     },
+    checkWordExists: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const { word } = req.query;
+
+            if (!word) {
+                return res
+                    .status(400)
+                    .json(createErrorResponse(400, "Word is required"));
+            }
+
+            const result = await User.checkWordExists(userId, word);
+
+            return res
+                .status(200)
+                .json(
+                    createResponse(
+                        200,
+                        result.exists
+                            ? "Word exists in vocabulary"
+                            : "Word not found in vocabulary",
+                        result,
+                    ),
+                );
+        } catch (error) {
+            return res
+                .status(500)
+                .json(createErrorResponse(500, "Internal server error"));
+        }
+    },
 };
 
 export default learnController;

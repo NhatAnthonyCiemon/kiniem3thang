@@ -135,4 +135,26 @@ router.get(
     learnController.getSuggestedWords,
 );
 
+/**
+ * @route   GET /learn/words/check?word=example
+ * @desc    Check if a word exists in user's vocabulary and return its order position
+ * @access  Private (requires authentication)
+ * @query   word - The word to check (required)
+ * @returns Object with exists status, order (position from newest), and word data
+ * @example
+ * GET /learn/words/check?word=apple
+ * Response:
+ * {
+ *   "exists": true,
+ *   "order": 5,
+ *   "wordData": { id: 15, word: "apple", description: "...", ... }
+ * }
+ * Order represents position from newest (1 = newest word, 2 = second newest, etc.)
+ */
+router.get(
+    "/words/check",
+    middleware.isAuthenticated,
+    learnController.checkWordExists,
+);
+
 export default router;

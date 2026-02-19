@@ -124,6 +124,45 @@ const wordService = {
         });
         return word.length > 0 ? word[0] : null;
     },
+    checkWordExists: async (userId, word) => {
+        // Tìm từ trong database của user
+        const existingWord = await prisma.words.findFirst({
+            where: {
+                user_id: userId,
+                word: {
+                    equals: word,
+                    mode: "insensitive", // case-insensitive comparison
+                },
+            },
+        });
+
+        if (!existingWord) {
+            return {
+                exists: false,
+                order: null,
+                wordData: null,
+            };
+        }
+
+        // Đếm số từ có id lớn hơn id của từ này
+        const countWordsAbove = await prisma.words.count({
+            where: {
+                user_id: userId,
+                id: {
+                    gt: existingWord.id,
+                },
+            },
+        });
+
+        // Order = số từ có id lớn hơn + 1
+        const order = countWordsAbove + 1;
+
+        return {
+            exists: true,
+            order: order,
+            wordData: existingWord,
+        };
+    },
 };
 
 export default wordService;

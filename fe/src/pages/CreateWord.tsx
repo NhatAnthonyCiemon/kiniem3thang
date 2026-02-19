@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowLeft, ArrowRight, Volume2 } from "lucide-react";
+import { Sparkles, ArrowLeft, ArrowRight, Volume2, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCreateWord } from "../hooks/useCreateWord";
 import { useWordSuggestions } from "../hooks/useWordSuggestions";
 import { useGenerateAI } from "../hooks/useGenerateAI";
 import { useDebounce } from "../hooks/useDebounce";
 import { usePhonetic } from "../hooks/usePhonetic";
+import { useCheckWordExists } from "../hooks/useCheckWordExists";
 import toast from "react-hot-toast";
 
 const CreateWord: React.FC = () => {
@@ -26,6 +27,7 @@ const CreateWord: React.FC = () => {
     const { mutate: generateAI, isPending: isGenerating } = useGenerateAI();
     const { mutate: createWord, isPending: isSaving } = useCreateWord();
     const { data: phonetic } = usePhonetic(selectedWord);
+    const { data: wordExists } = useCheckWordExists(selectedWord);
 
     const handleSelectWord = (word: string) => {
         setSelectedWord(word);
@@ -263,9 +265,16 @@ const CreateWord: React.FC = () => {
                     >
                         {/* Selected Word */}
                         <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl shadow-sm px-3 py-2.5 sm:p-6 mb-3 sm:mb-6 text-white">
-                            <p className="text-xs sm:text-sm opacity-90 mb-1">
-                                Từ vựng
-                            </p>
+                            <div className="flex items-center gap-2 mb-1">
+                                <p className="text-xs sm:text-sm opacity-90">
+                                    Từ vựng
+                                </p>
+                                {wordExists?.exists && (
+                                    <span title="Từ này đã có trong danh sách">
+                                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                    </span>
+                                )}
+                            </div>
                             <div className="flex items-center justify-between gap-3 sm:gap-4">
                                 <div className="flex-1 min-w-0">
                                     <h2 className="text-2xl sm:text-3xl font-bold mb-1 break-words">
@@ -286,6 +295,57 @@ const CreateWord: React.FC = () => {
                                 </button>
                             </div>
                         </div>
+
+                        {/* Existing Word Info Banner */}
+                        {wordExists?.exists && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-yellow-500/20 border border-yellow-500/50 rounded-xl sm:rounded-2xl px-3 py-2.5 sm:p-4 mb-3 sm:mb-4"
+                            >
+                                <div className="flex items-start gap-2 mb-2">
+                                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 flex-shrink-0 mt-0.5" />
+                                    <div className="flex-1">
+                                        <p className="text-sm sm:text-base font-medium text-yellow-100 mb-1">
+                                            Từ này đã tồn tại (vị trí #
+                                            {wordExists.order})
+                                        </p>
+                                        <p className="text-xs sm:text-sm text-yellow-200/80">
+                                            Thông tin dưới đây để tham khảo. Bạn
+                                            vẫn có thể lưu lại để tạo bản ghi
+                                            mới.
+                                        </p>
+                                    </div>
+                                </div>
+                                {wordExists.wordData && (
+                                    <div className="space-y-2 mt-3 pl-7">
+                                        {wordExists.wordData.description && (
+                                            <div>
+                                                <p className="text-xs text-yellow-200/70 mb-1">
+                                                    Mô tả hiện tại:
+                                                </p>
+                                                <p className="text-sm text-yellow-100 bg-black/20 rounded-lg px-3 py-2">
+                                                    {
+                                                        wordExists.wordData
+                                                            .description
+                                                    }
+                                                </p>
+                                            </div>
+                                        )}
+                                        {wordExists.wordData.note && (
+                                            <div>
+                                                <p className="text-xs text-yellow-200/70 mb-1">
+                                                    Ghi chú hiện tại:
+                                                </p>
+                                                <p className="text-sm text-yellow-100 bg-black/20 rounded-lg px-3 py-2">
+                                                    {wordExists.wordData.note}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </motion.div>
+                        )}
 
                         {/* Description */}
                         <div className="bg-slate-800/90 rounded-xl sm:rounded-2xl shadow-sm border border-slate-700 px-2.5 py-2 sm:p-4 mb-3 sm:mb-4">
