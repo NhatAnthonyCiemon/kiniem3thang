@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, FileText, Download, FileDown } from "lucide-react";
+import {
+    ArrowLeft,
+    FileText,
+    Download,
+    FileDown,
+    FileType,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWordByOrder } from "../hooks/useWordByOrder";
 import axiosInstance from "../api/axiosInstance";
@@ -14,6 +20,7 @@ import {
     HeadingLevel,
 } from "docx";
 import { saveAs } from "file-saver";
+import jsPDF from "jspdf";
 
 interface Word {
     id: number;
@@ -287,6 +294,134 @@ const ExportWords: React.FC = () => {
         }
     };
 
+    const handleExportPDF = () => {
+        if (words.length === 0) return;
+
+        try {
+            const doc = new jsPDF();
+            let yPosition = 20;
+            const pageHeight = doc.internal.pageSize.height;
+            const marginBottom = 20;
+
+            // Title
+            doc.setFontSize(20);
+            doc.setFont("helvetica", "bold");
+            doc.text(`DANH SACH TU VUNG (${words.length} tu)`, 105, yPosition, {
+                align: "center",
+            });
+            yPosition += 10;
+
+            // Subtitle
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Tu vi tri ${startPos} den ${endPos}`, 105, yPosition, {
+                align: "center",
+            });
+            yPosition += 7;
+
+            doc.setFontSize(10);
+            doc.text(
+                `Che do: ${exportMode === "simple" ? "Don gian" : "Day du"} | Xuat luc: ${new Date().toLocaleString("vi-VN")}`,
+                105,
+                yPosition,
+                { align: "center" },
+            );
+            yPosition += 15;
+
+            // Words
+            words.forEach((word, index) => {
+                // Check if need new page
+                if (yPosition > pageHeight - marginBottom) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+
+                // Word number and title
+                doc.setFontSize(14);
+                doc.setFont("helvetica", "bold");
+                doc.text(
+                    `${index + 1}. ${word.word.toUpperCase()}`,
+                    20,
+                    yPosition,
+                );
+                yPosition += 8;
+
+                // Description
+                if (word.description) {
+                    doc.setFontSize(11);
+                    doc.setFont("helvetica", "bold");
+                    doc.text("Nghia: ", 25, yPosition);
+
+                    doc.setFont("helvetica", "normal");
+                    const descLines = doc.splitTextToSize(
+                        word.description,
+                        160,
+                    );
+                    doc.text(descLines, 45, yPosition);
+                    yPosition += descLines.length * 6 + 3;
+                }
+
+                // Only add note and ai_content in full mode
+                if (exportMode === "full") {
+                    // Note
+                    if (word.note) {
+                        if (yPosition > pageHeight - marginBottom) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+
+                        doc.setFontSize(11);
+                        doc.setFont("helvetica", "bold");
+                        doc.text("Ghi chu: ", 25, yPosition);
+
+                        doc.setFont("helvetica", "italic");
+                        const noteLines = doc.splitTextToSize(word.note, 160);
+                        doc.text(noteLines, 45, yPosition);
+                        yPosition += noteLines.length * 6 + 3;
+                    }
+
+                    // AI Content
+                    if (word.ai_content) {
+                        if (yPosition > pageHeight - marginBottom) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+
+                        doc.setFontSize(11);
+                        doc.setFont("helvetica", "bold");
+                        doc.text("AI Content:", 25, yPosition);
+                        yPosition += 6;
+
+                        doc.setFont("helvetica", "normal");
+                        doc.setFontSize(10);
+                        const aiLines = word.ai_content.split("\n");
+                        aiLines.forEach((line) => {
+                            if (yPosition > pageHeight - marginBottom) {
+                                doc.addPage();
+                                yPosition = 20;
+                            }
+                            const wrappedLines = doc.splitTextToSize(
+                                line || " ",
+                                165,
+                            );
+                            doc.text(wrappedLines, 25, yPosition);
+                            yPosition += wrappedLines.length * 5;
+                        });
+                        yPosition += 3;
+                    }
+                }
+
+                yPosition += 5; // Space between words
+            });
+
+            doc.save(`tu-vung-${startPos}-${endPos}.pdf`);
+            toast.success("Đã xuất file PDF thành công!");
+        } catch (error) {
+            console.error("Error exporting PDF:", error);
+            toast.error("Có lỗi khi xuất file PDF!");
+        }
+    };
+
     const formatAIContent = (content: string) => {
         if (!content) return null;
         return content.split("\n").map((line, index) => {
@@ -499,6 +634,13 @@ const ExportWords: React.FC = () => {
                                 >
                                     <Download className="w-4 h-4" />
                                     <span>Xuất TXT</span>
+                                </button>
+                                <button
+                                    onClick={handleExportPDF}
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                                >
+                                    <FileType className="w-4 h-4" />
+                                    <span>Xuất PDF</span>
                                 </button>
                             </div>
                         </div>
