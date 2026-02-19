@@ -32,11 +32,11 @@ Giải thích ý nghĩa của từ bằng tiếng Việt, ngắn gọn và dễ 
 2. Synonyms  
 Liệt kê các từ đồng nghĩa phổ biến.
 Ghi rõ từ loại của từng từ (ví dụ: (n), (v), (adj), (adv)...).
-Nếu từ đồng nghĩa có sắc thái hoặc cách dùng khác, hãy ghi chú ngắn gọn.
+Nêu rõ sự khác biệt trong các dùng nếu có
 Nếu không có từ đồng nghĩa phù hợp, ghi: Không có.
 
 3. Usage  
-Giải thích cách dùng của từ.
+Giải thích cách dùng của từ. Sau khi giải thích xong thì
 Đưa ra tối thiểu 5 câu ví dụ bằng tiếng Anh.
 Sau mỗi câu ví dụ, giải thích rõ nghĩa của câu đó bằng tiếng Việt.
 
